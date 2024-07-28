@@ -1,25 +1,12 @@
-import type { Metadata } from "next";
-import { Inter} from "next/font/google";
 
-const inter = Inter({ subsets: ["latin"] });
-
-export const metadata: Metadata = {
-  title: "Get started",
-  description: "get started with feedback",
-};
-
-export default function RootLayout({
-  children,
-}: Readonly<{
+interface RootLayoutProps {
   children: React.ReactNode;
-}>) {
+}
+
+export default async function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en" className="bg-black">
-      <body className={inter.className} >
-        <div className="container w-[30%] h-screen">
+    <div className="w-[30%] container h-screen">
       {children}
-      </div>
-        </body>
-    </html>
+    </div>
   );
 }
