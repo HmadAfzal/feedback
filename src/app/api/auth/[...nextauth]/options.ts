@@ -40,7 +40,6 @@ export const authOptions: NextAuthOptions = {
           });
           await newUser.save();
         } else {
-          console.log("Existing User Found:", existingUser);
         }
       }
       return true;
@@ -49,7 +48,6 @@ export const authOptions: NextAuthOptions = {
       await dbConnect();
       if (!user && token.email) {
         const dbUser = await UserModel.findOne({ email: token.email });
-        console.log("Fetched User from DB:", dbUser);
         if (dbUser) {
           user = dbUser as NextAuthUser;
         }
@@ -62,7 +60,6 @@ export const authOptions: NextAuthOptions = {
         token.profilepic = user.profilepic;
         token.providerAccountId = user.providerAccountId;
       }
-      console.log("JWT Token:", token);
       return token;
     },
     async session({ session, token }) {
@@ -73,7 +70,6 @@ export const authOptions: NextAuthOptions = {
         session.user.profilepic = token.profilepic;
         session.user.providerAccountId = token.providerAccountId;
       }
-      console.log("Session:", session);
       return session;
     },
   },
