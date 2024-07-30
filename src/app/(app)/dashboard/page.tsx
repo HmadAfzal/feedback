@@ -1,17 +1,15 @@
 'use client'
 
 import { useSession } from 'next-auth/react';
-import React from 'react'
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { getFirstName } from '@/utils/getfirstname';
-import { Separator } from '@/components/ui/separator';
+import React, { useState } from 'react'
 import { Loader2 } from 'lucide-react';
+import CreateSpace from '@/components/dashboard/CreateSpace';
+import Dashboard from '@/components/dashboard/Dashboard';
 
 const page = () => {
+  const [createSpace, setCreateSpace] = useState(false);
 
   const { data: session, status } = useSession()
-
-  const username = session?.user.username || '';
 if(status==='loading'){
   return (
     <div className='w-full flex items-center justify-center py-40'>
@@ -22,17 +20,8 @@ if(status==='loading'){
 }
   return (
     <div>
-      <div className='flex items-center justify-start gap-5 mt-32'>
-<Avatar className='h-32 w-32'>
-  <AvatarImage src={session?.user.profilepic} />
-  <AvatarFallback>img</AvatarFallback>
-</Avatar>
-<div className='flex flex-col gap-2'>
-  <h1 className='font-bold text-5xl'> {getFirstName(username)}&apos;s Dashboard</h1>
-  <p className='font-normail text-lg'>{session?.user.email}</p>
-</div>
-</div>
-<Separator className="my-12" />
+      
+    {createSpace ? <CreateSpace setCreateSpace={setCreateSpace}/> : <Dashboard user={session?.user} setCreateSpace={setCreateSpace}/> }
     </div>
   )
 }

@@ -7,7 +7,7 @@ interface RootLayoutProps {
   export default async function RootLayout({ children }: RootLayoutProps) {
     return (
       <div className="w-[90%] container">
-        <Nav/>
+        
         {children}
       </div>
     );

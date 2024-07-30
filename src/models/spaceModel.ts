@@ -14,7 +14,6 @@ export interface Space extends Document {
   title: string;
   description: string;
   isDarkTheme: boolean;
-  buttonColor: string;
   buttonText: string;
   thankyouPageTitle: string;
   thankyouPageText: string;
@@ -62,11 +61,6 @@ const SpaceSchema: Schema<Space> = new mongoose.Schema({
   isDarkTheme: {
     type: Boolean,
     default: true,
-  },
-  buttonColor: {
-    type: String,
-    required: true,
-    default: '#D4510D',
   },
   buttonText: {
     type: String,
