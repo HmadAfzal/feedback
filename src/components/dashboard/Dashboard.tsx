@@ -14,12 +14,12 @@ const Dashboard = ({ user, setCreateSpace }: { user: Session, setCreateSpace: (v
       <Nav/>
         <div className='flex items-center justify-start gap-5 mt-28'>
           <Avatar className='h-32 w-32'>
-            <AvatarImage src={user.profilepic} />
+            <AvatarImage src={user?.profilepic} />
             <AvatarFallback>img</AvatarFallback>
           </Avatar>
           <div className='flex flex-col gap-2'>
-            <h1 className='font-bold text-5xl'> {getFirstName(user.username || '')}&apos;s Dashboard</h1>
-            <p className='font-normail text-lg'>{user.email}</p>
+            <h1 className='font-bold text-5xl'> {getFirstName(user?.username || '')}&apos;s Dashboard</h1>
+            <p className='font-normail text-lg'>{user?.email}</p>
           </div>
         </div>
       <Separator className="my-12" />

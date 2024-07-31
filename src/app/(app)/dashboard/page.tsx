@@ -21,7 +21,7 @@ if(status==='loading'){
   return (
     <div>
       
-    {createSpace ? <CreateSpace setCreateSpace={setCreateSpace}/> : <Dashboard user={session?.user} setCreateSpace={setCreateSpace}/> }
+    {createSpace ? <CreateSpace setCreateSpace={setCreateSpace} user={session?.user}/> : <Dashboard user={session?.user} setCreateSpace={setCreateSpace}/> }
     </div>
   )
 }

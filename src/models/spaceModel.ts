@@ -15,10 +15,10 @@ export interface Space extends Document {
   description: string;
   isDarkTheme: boolean;
   buttonText: string;
+  ConsentStatement: string;
   thankyouPageTitle: string;
   thankyouPageText: string;
   sticker: string;
-  hideSticker: boolean;
   messages: Message[];
   owner: mongoose.Schema.Types.ObjectId;
 }
@@ -67,6 +67,11 @@ const SpaceSchema: Schema<Space> = new mongoose.Schema({
     required: true,
     default: 'Send in feedback',
   },
+  ConsentStatement:{
+    type: String,
+    required: true,
+    default: 'I give permission to use this feedback',
+  },
   thankyouPageTitle: {
     type: String,
     required: true,
@@ -80,10 +85,6 @@ const SpaceSchema: Schema<Space> = new mongoose.Schema({
   sticker: {
     type: String,
     default: 'https://media.giphy.com/media/8qD1FHjc4wllVBL3ln/giphy.gif?cid=ecf05e47gvya2nlu06oll65e05mxeg23paqfdhwynqmzbbyf&ep=v1_gifs_search&rid=giphy.gif&ct=g',
-  },
-  hideSticker: {
-    type: Boolean,
-    default: false,
   },
   messages: [MessageSchema],
   owner: {
