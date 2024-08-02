@@ -66,7 +66,8 @@ export async function POST(request: Request) {
         await user.save();
         return Response.json({
             success: true,
-            message: 'space created successfully'
+            space, 
+            message:'Space created successfully'
         }, { status: 200 })
 
 

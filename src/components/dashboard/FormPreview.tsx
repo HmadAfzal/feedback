@@ -8,6 +8,8 @@ import axios from 'axios';
 import { toast } from '../ui/use-toast';
 import { Session } from '@/schemas/Session';
 import { z } from 'zod';
+import { useAppDispatch } from '@/redux/hooks';
+import { addSpace } from '@/redux/spaceslice';
 
 const FormPreview = ({ formData, selectedFile, setCreateSpace, user, imageFile, setPreview }: 
     { 
@@ -19,8 +21,8 @@ const FormPreview = ({ formData, selectedFile, setCreateSpace, user, imageFile, 
       setPreview: (value: boolean) => void 
     }) => {
     const [loading, setLoading] = useState(false);
-console.log(formData)
 
+    const dispatch=useAppDispatch();
     const createSpace = async () => {
         setLoading(true);
         try {
@@ -46,7 +48,9 @@ console.log(formData)
                 ...formData,
                 image: imageUrl
             });
+            dispatch(addSpace(response?.data.space))
             setCreateSpace(false);
+            console.log(response.data)
             toast({
                 title: 'Success',
                 description: response?.data.message,
