@@ -16,13 +16,14 @@ useEffect(()=>{
   const getSpaces=async()=>{
     try {
       const response=await axios.get('/api/get-spaces')
-      console.log(response?.data)
+      console.log(response?.data.spaces)
+      
     } catch (error) {
       console.log(error)
     }
   }
   getSpaces();
-},[session])
+},[])
 
 if(status==='loading'){
   return (

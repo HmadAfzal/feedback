@@ -6,6 +6,7 @@ import { Toaster } from "@/components/ui/toaster";
 import Authprovider from "@/context/Authprovider";
 import { ThemeProvider } from "@/components/theme-provider";
 import Nav from "@/components/nav/Nav";
+import ReduxProvider from "@/context/ReduxProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -32,9 +33,10 @@ export default function RootLayout({
             defaultTheme="system"
             enableSystem
             disableTransitionOnChange
-          >             
+          >           
+          <ReduxProvider> 
                 {children}
-          
+          </ReduxProvider> 
             <Toaster />
           </ThemeProvider>
         </Authprovider>
