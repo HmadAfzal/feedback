@@ -15,7 +15,7 @@ const Dashboard = ({ user, setCreateSpace }: { user: Session, setCreateSpace: (v
         <div className='flex items-center justify-start gap-5 mt-28'>
           <Avatar className='h-32 w-32'>
             <AvatarImage src={user?.profilepic} />
-            <AvatarFallback>img</AvatarFallback>
+            <AvatarFallback>pf</AvatarFallback>
           </Avatar>
           <div className='flex flex-col gap-2'>
             <h1 className='font-bold text-5xl'> {getFirstName(user?.username || '')}&apos;s Dashboard</h1>

@@ -6,7 +6,7 @@ export async function POST(request: Request) {
     await dbConnect();
     try {
         const { name, image, title, description, isDarkTheme, buttonText, ConsentStatement, thankyouPageTitle, thankyouPageText, userId } = await request.json();
-        if (!name || !image || !title || !description || !thankyouPageTitle || !thankyouPageText || !buttonText || !ConsentStatement) {
+        if (!name || !title || !description || !thankyouPageTitle || !thankyouPageText || !buttonText || !ConsentStatement) {
             return Response.json(
                 {
                     success: false,
@@ -25,8 +25,6 @@ export async function POST(request: Request) {
             );
         }
 
-
-console.log(userId)
         const user = await UserModel.findOne({ providerAccountId: userId });
         if (!user) {
             return Response.json(
@@ -38,7 +36,6 @@ console.log(userId)
             );
         }
 
-console.log(user)
         const spaceAlreadyExists = await SpaceModel.findOne({ name });
         if (spaceAlreadyExists) {
             return Response.json(
@@ -53,7 +50,7 @@ console.log(user)
 
         const newSpace = await SpaceModel.create({
             name,
-            image,
+            image: image || user.profilepic,
             title,
             description,
             isDarkTheme,
