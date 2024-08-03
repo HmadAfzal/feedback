@@ -92,11 +92,11 @@ const FormPreview = ({ formData, selectedFile, setCreateSpace, user, imageFile, 
             <div className='pt-12 flex flex-col gap-4'>
                 <h3 className='font-semibold text-xl'>Tips to write a <span className='text-[#EA580C]'>feedback</span></h3>
                 <ul className='list-disc'>
-                    <li>What was your project about and how did Hmad contribute?</li>
-                    <li>How would you rate your overall experience working with Hmad?</li>
-                    <li>What specific qualities or skills did Hmad have?</li>
-                    <li>Is there anything you think Hmad could improve on in future projects?</li>
-                    <li>Would you recommend Hmad to others looking for web development services?</li>
+                <li>Clearly identify what you are giving feedback about. Vague comments can be confusing and unhelpful.</li>
+               <li>Focus on providing suggestions for improvement rather than just pointing out flaws.</li>
+               <li>Base your feedback on observable behavior or specific outcomes rather than personal opinions or feelings.</li>
+               <li> Consider the recipient's feelings and be respectful in your tone.</li>
+               <li>If possible, follow up to see how the recipient is progressing and provide additional support or feedback as needed.</li>
                 </ul>
             </div>
             <div className="flex items-center space-x-2 py-8">

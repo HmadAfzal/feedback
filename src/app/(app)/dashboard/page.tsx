@@ -26,9 +26,6 @@ const page = () => {
   }, [dispatch, session])
 
 
-const spaces=useAppSelector(getSpaces)
-console.log(spaces)
-
   if (status === 'loading') {
     return (
       <div className='w-full flex items-center justify-center py-40'>

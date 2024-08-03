@@ -28,7 +28,7 @@ ConsentStatement: string,
 thankyouPageTitle: string,
 thankyouPageText:string,
 sticker:string,
-id:string,
+_id:string,
 createdAt:string,
 Messages:Message[],
 owner:string

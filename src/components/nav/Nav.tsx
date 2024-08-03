@@ -3,10 +3,16 @@ import React from 'react'
 import { Button } from '@/components/ui/button'
 import { ModeToggle } from '@/components/ui/Modetoggle'
 import { signOut } from 'next-auth/react'
+import { useAppDispatch } from '@/redux/hooks'
+import { clearSpaceSlice } from '@/redux/spaceslice'
 
 const Nav = () => {
+    const dispatch = useAppDispatch();
+
     const handleSignout = async () => {
-        await signOut();
+         dispatch(clearSpaceSlice())
+         await signOut();
+       
     };
     return (
         <nav className='flex items-center justify-between py-6'>
