@@ -12,8 +12,8 @@ const SpacePage = async ({ params }: { params: { spacename: string } }) => {
   if (!space) {
     return <div className='flex bg-black font-3xl text-white items-center justify-center h-screen w-screen'>Space not found</div>
   }
-
-  return <Main spaceData={space}/>
+  const plainSpace = JSON.parse(JSON.stringify(space));
+  return <Main spaceData={plainSpace}/>
 }
 
 export default SpacePage

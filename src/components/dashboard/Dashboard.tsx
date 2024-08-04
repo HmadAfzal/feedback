@@ -78,7 +78,7 @@ const Dashboard = ({ user, setCreateSpace }: { user: Session, setCreateSpace: (v
           </div>
         ))
       ) : (
-        <p>No spaces available.</p>
+        <p className='text-center py-20 text-xl font-semibold '>No space yet, create a new one?</p>
       )}
       {spaces.length > itemsPerPage && (
         <Pagination className='pt-4 pb-12'>

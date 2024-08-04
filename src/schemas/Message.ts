@@ -3,16 +3,16 @@ import { z } from "zod";
 export interface Message {
     feedback: string;
     name: string;
-    email?: string;
+    email: string;
     image?: string;
   }
   
 
   export const MessageSchema = z.object({
 
-    feedback: z.string(),
-    name: z.string(),
-    email: z.string().email().optional(),
+    feedback: z.string().min(25,{message:'Please lengthen the text to 25 chrachters or more'}),
+    name: z.string().min(1,{message:'Name is required'}),
+    email: z.string().email(),
     image: z.string().optional(),
 
 });
