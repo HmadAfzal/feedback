@@ -5,6 +5,8 @@ export interface Message {
     name: string;
     email: string;
     image?: string;
+    _id:string;
+    createdAt:string
   }
   
 

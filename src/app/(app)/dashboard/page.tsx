@@ -6,8 +6,8 @@ import { Loader2 } from 'lucide-react';
 import CreateSpace from '@/components/dashboard/CreateSpace';
 import Dashboard from '@/components/dashboard/Dashboard';
 import axios from 'axios';
-import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import { getSpaces, selectSpaces } from '@/redux/spaceslice';
+import { useAppDispatch, } from '@/redux/hooks';
+import {  selectSpaces } from '@/redux/spaceslice';
 
 const page = () => {
   const [createSpace, setCreateSpace] = useState(false);

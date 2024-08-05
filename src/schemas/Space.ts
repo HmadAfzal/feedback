@@ -30,6 +30,6 @@ thankyouPageText:string,
 sticker:string,
 _id:string,
 createdAt:string,
-Messages:Message[],
+messages:Message[],
 owner:string
 }

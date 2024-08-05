@@ -6,7 +6,6 @@ import { Separator } from '@/components/ui/separator';
 import { Link2, Rocket, Settings } from 'lucide-react';
 import { Session } from '@/schemas/Session';
 import { Button } from '../ui/button';
-import Nav from '../nav/Nav';
 import Link from 'next/link';
 import { useAppSelector } from '@/redux/hooks';
 import { getSpaces } from '@/redux/spaceslice';
@@ -38,7 +37,6 @@ const Dashboard = ({ user, setCreateSpace }: { user: Session, setCreateSpace: (v
 
   return (
     <div>
-      <Nav />
       <div className='flex items-center justify-start gap-5 mt-16'>
         <Avatar className='h-32 w-32'>
           <AvatarImage src={user?.profilepic} />
@@ -58,8 +56,8 @@ const Dashboard = ({ user, setCreateSpace }: { user: Session, setCreateSpace: (v
       </div>
       {currentItems && currentItems.length > 0 ? (
         currentItems.map((space: Space) => (
-          <div key={space?._id} className='shadow-lg hover:shadow-sm transition-all w-full dark:bg-neutral-800 bg-neutral-200 rounded-lg px-6 py-5 my-6 flex justify-between'>
-            <div className='flex items-center gap-6'>
+          <Link href={`space/${space?.name}`} key={space?._id} className='shadow-lg hover:shadow-sm transition-all w-full dark:bg-neutral-800 bg-neutral-200 rounded-lg px-6 py-5 my-6 flex justify-between'>
+            <div className='flex items-center gap-6'> 
               <Avatar className='h-16 w-16'>
                 <AvatarImage src={space?.image} />
                 <AvatarFallback>pf</AvatarFallback>
@@ -68,14 +66,14 @@ const Dashboard = ({ user, setCreateSpace }: { user: Session, setCreateSpace: (v
                 <h3 className='font-bold text-xl pb-2'>{space?.name}</h3>
                 <div className='flex items-center gap-2 text-md dark:text-neutral-400 text-neutral-700 hover:underline'>
                   <Link2 />
-                  <Link href={`${baseUrl}/u/${space?.name}`}>{baseUrl}/u/{space?.name}</Link>
+                  <p>{baseUrl}/u/{space?.name}</p>
                 </div>
               </div>
             </div>
             <div className='cursor-pointer dark:text-neutral-400 text-neutral-700'>
-              <Settings size={22} />
+              <Settings size={22} />  
             </div>
-          </div>
+          </Link>
         ))
       ) : (
         <p className='text-center py-20 text-xl font-semibold '>No space yet, create a new one?</p>
