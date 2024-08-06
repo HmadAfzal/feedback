@@ -19,6 +19,7 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 import { Space } from '@/schemas/Space';
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 
 const Dashboard = ({ user, setCreateSpace }: { user: Session, setCreateSpace: (value: boolean) => void }) => {
   const spaces = useAppSelector(getSpaces) || [];
@@ -76,7 +77,14 @@ const Dashboard = ({ user, setCreateSpace }: { user: Session, setCreateSpace: (v
           </Link>
         ))
       ) : (
-        <p className='text-center py-20 text-xl font-semibold '>No space yet, create a new one?</p>
+        <div className='h-[40vh] '>
+         <DotLottieReact
+      src="https://lottie.host/87e53e15-91fb-4670-b307-5eeccaf4a8e9/q1dZxDTPew.json"
+     loop
+      autoplay
+    />
+    <p className='text-center text-lg font-semibold text-neutral-800 dark:text-neutral-500'>No spaces yet, create one?</p>
+    </div>
       )}
       {spaces.length > itemsPerPage && (
         <Pagination className='pt-4 pb-12'>

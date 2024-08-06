@@ -8,7 +8,6 @@ import Dashboard from '@/components/dashboard/Dashboard';
 import axios from 'axios';
 import { useAppDispatch, } from '@/redux/hooks';
 import {  selectSpaces } from '@/redux/spaceslice';
-
 const page = () => {
   const [createSpace, setCreateSpace] = useState(false);
   const { data: session, status } = useSession()
@@ -36,7 +35,6 @@ const page = () => {
   }
   return (
     <div>
-
       {createSpace ? <CreateSpace setCreateSpace={setCreateSpace} user={session?.user} /> : <Dashboard user={session?.user} setCreateSpace={setCreateSpace} />}
     </div>
   )

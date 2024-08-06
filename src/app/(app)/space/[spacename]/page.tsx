@@ -6,6 +6,7 @@ import { getSpaces } from '@/redux/spaceslice'
 import { Heart, Link2, Settings } from 'lucide-react'
 import { useParams } from 'next/navigation'
 import { ScrollArea } from "@/components/ui/scroll-area"
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 
 import React, { useEffect, useState } from 'react'
 import { Message } from '@/schemas/Message'
@@ -56,7 +57,14 @@ const Page = () => {
             }
             <Separator className='mt-4' />
             {
-               space.messages.length==0 ? <div className='w-full text-center my-12'>No messages yet</div>
+               space.messages.length==0 ? <div className='h-[40vh] my-20 '>
+               <DotLottieReact
+            src="https://lottie.host/87e53e15-91fb-4670-b307-5eeccaf4a8e9/q1dZxDTPew.json"
+           loop
+            autoplay
+          />
+          <p className='text-center text-lg font-semibold text-neutral-800 dark:text-neutral-500'>No feedbacks yet</p>
+          </div>
                :  <div className='w-full h-[60vh] flex'>
                 <div className='w-[15%] p-4'>
                     <div className='pb-4'>
