@@ -20,10 +20,10 @@ import {
 } from "@/components/ui/pagination";
 import { Space } from '@/schemas/Space';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+import SpaceHeader from '../SpaceHeader';
 
 const Dashboard = ({ user, setCreateSpace }: { user: Session, setCreateSpace: (value: boolean) => void }) => {
   const spaces = useAppSelector(getSpaces) || [];
-  const baseUrl = `${window.location.protocol}//${window.location.host}`;
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 3;
 
@@ -47,7 +47,7 @@ const Dashboard = ({ user, setCreateSpace }: { user: Session, setCreateSpace: (v
           <h1 className='font-bold text-5xl'>{getFirstName(user?.username || '')}&apos;s Dashboard</h1>
           <p className='font-normal text-lg'>{user?.email}</p>
         </div>
-      </div>
+      </div>  
       <Separator className="my-12" />
       <div className='w-full flex items-center justify-between mb-6'>
         <h2 className='font-bold text-3xl'>Spaces</h2>
@@ -57,24 +57,9 @@ const Dashboard = ({ user, setCreateSpace }: { user: Session, setCreateSpace: (v
       </div>
       {currentItems && currentItems.length > 0 ? (
         currentItems.map((space: Space) => (
-          <Link href={`space/${space?.name}`} key={space?._id} className='shadow-lg hover:shadow-sm transition-all w-full dark:bg-neutral-800 bg-neutral-200 rounded-lg px-6 py-5 my-6 flex justify-between'>
-            <div className='flex items-center gap-6'> 
-              <Avatar className='h-16 w-16'>
-                <AvatarImage src={space?.image} />
-                <AvatarFallback>pf</AvatarFallback>
-              </Avatar>
-              <div>
-                <h3 className='font-bold text-xl pb-2'>{space?.name}</h3>
-                <div className='flex items-center gap-2 text-md dark:text-neutral-400 text-neutral-700 hover:underline'>
-                  <Link2 />
-                  <p>{baseUrl}/u/{space?.name}</p>
-                </div>
-              </div>
-            </div>
-            <div className='cursor-pointer dark:text-neutral-400 text-neutral-700'>
-              <Settings size={22} />  
-            </div>
-          </Link>
+          <Link href={`space/${space?.name}`} key={space?._id}>     
+        <SpaceHeader space={space} h={16} w={16} bg={'dark:bg-neutral-800 bg-neutral-200'} p={'py-5'}/>
+        </Link>
         ))
       ) : (
         <div className='h-[40vh] '>

@@ -11,6 +11,7 @@ import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import React, { useEffect, useState } from 'react'
 import { Message } from '@/schemas/Message'
 import { Space } from '@/schemas/Space'
+import SpaceHeader from '@/components/SpaceHeader'
 
 const Page = () => {
     const spaces = useAppSelector(getSpaces)
@@ -18,7 +19,7 @@ const Page = () => {
     const [space, setSpace]=useState<Space>()
 
     useEffect(()=>{
-        const space = spaces?.find((space) => space.name === params.spacename)
+        const space = spaces?.find((space) => space?.name === params.spacename)
         setSpace(space)
     }, [spaces, params])
 
@@ -35,29 +36,12 @@ const Page = () => {
             <Separator className='my-4' />
             {
                 space && (
-                    <div key={space._id} className='flex justify-between p-2'>
-                        <div className='flex items-center gap-6'>
-                            <Avatar className='h-24 w-24'>
-                                <AvatarImage src={space.image} />
-                                <AvatarFallback>pf</AvatarFallback>
-                            </Avatar>
-                            <div className='flex flex-col gap-4'>
-                                <h3 className='font-bold text-3xl '>{space.name}</h3>
-                                <div className='flex items-center gap-2 text-md dark:text-neutral-400 text-neutral-700 hover:underline'>
-                                    <Link2 />
-                                    <p>{baseUrl}/u/{space.name}</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div className='cursor-pointer dark:text-neutral-400 text-neutral-700'>
-                            <Settings size={22} />
-                        </div>
-                    </div>
+   <SpaceHeader space={space} h={24} w={24} bg={"background"} p={'py-1'}/>
                 )
             }
             <Separator className='mt-4' />
             {
-               space.messages.length==0 ? <div className='h-[40vh] my-20 '>
+               space?.messages.length==0 ? <div className='h-[40vh] my-20 '>
                <DotLottieReact
             src="https://lottie.host/87e53e15-91fb-4670-b307-5eeccaf4a8e9/q1dZxDTPew.json"
            loop
@@ -83,7 +67,7 @@ const Page = () => {
                     </div>
                     <ScrollArea className="h-[62vh] w-full rounded-md px-12 py-4">
                         {
-                            space && space.messages.map((message: Message) => {
+                            space && space?.messages.map((message: Message) => {
                                 return (
                                     <div key={message._id} className='w-full dark:bg-neutral-800 bg-neutral-200 rounded-lg p-8 my-4'>
                                         <div className='w-full flex items-center justify-between pb-4'>
