@@ -3,7 +3,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Separator } from '@/components/ui/separator'
 import { useAppSelector } from '@/redux/hooks'
 import { getSpaces } from '@/redux/spaceslice'
-import { Heart, Link2, Settings } from 'lucide-react'
+import { Heart, Link2, Pen, Settings } from 'lucide-react'
 import { useParams } from 'next/navigation'
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
@@ -12,31 +12,40 @@ import React, { useEffect, useState } from 'react'
 import { Message } from '@/schemas/Message'
 import { Space } from '@/schemas/Space'
 import SpaceHeader from '@/components/SpaceHeader'
+import { Button } from '@/components/ui/button'
+import EditSpace from '@/components/space/EditSpace'
 
 const Page = () => {
     const spaces = useAppSelector(getSpaces)
     const params = useParams()
     const [space, setSpace]=useState<Space>()
+    const [editSpace, setEditSpace]=useState(false)
 
     useEffect(()=>{
         const space = spaces?.find((space) => space?.name === params.spacename)
         setSpace(space)
     }, [spaces, params])
 
-    
-    const baseUrl = `${window.location.protocol}//${window.location.host}`
-    if (!space){
+        if (!space){
         return (
             <div className='w-full text-center my-12'>No space found</div>
         )
     }
 
     return (
+        <>
+       {
+editSpace? <EditSpace setEditSpace={setEditSpace} space={space}/> : 
         <div>
             <Separator className='my-4' />
             {
                 space && (
+  <>
    <SpaceHeader space={space} h={24} w={24} bg={"background"} p={'py-1'}/>
+      <div className='flex w-full justify-end' >
+        <Button className='flex items-center gap-3' onClick={()=>setEditSpace(true)}><Pen size={20}/>Edit Space</Button>
+    </div>
+    </>
                 )
             }
             <Separator className='mt-4' />
@@ -101,7 +110,8 @@ const Page = () => {
             }
 
            
-        </div>
+        </div>  }
+        </>
     )
 }
 

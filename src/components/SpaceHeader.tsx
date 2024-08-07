@@ -15,7 +15,8 @@ import { toast } from './ui/use-toast'
 const SpaceHeader = ({space, h, w, bg, p}:{space: Space, h:number, w:number, bg:string, p:string}) => {
     const baseUrl = `${window.location.protocol}//${window.location.host}`;
     const url=`${baseUrl}/u/${space?.name}`
-const handleCopyLink=()=>{
+const handleCopyLink=(event: React.MouseEvent)=>{
+    event.stopPropagation();
     navigator.clipboard.writeText(url)
     toast({
         title:'Success',
@@ -48,9 +49,6 @@ const handleCopyLink=()=>{
                 <DropdownMenuContent align="end" className="border-none p-2 mx-0">
                     <DropdownMenuItem className='cursor-pointer' onClick={handleCopyLink}>
                          Copy link
-                    </DropdownMenuItem>
-                    <DropdownMenuItem className='cursor-pointer'>
-                        Edit space
                     </DropdownMenuItem>
                     <DropdownMenuItem className='cursor-pointer text-bg-red-500'>
                          Delete
