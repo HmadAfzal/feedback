@@ -42,14 +42,13 @@ const user=session?.user
 
 
   const onSubmit = async (data: z.infer<typeof SpaceSchema>) => {
-    console.log(data)
       setFormData(data);
       setPreview(true);
   };
   return (
     <>
     {preview ? (
-        <EditSpacePreview formData={formData} selectedFile={selectedFile} setEditSpace={setEditSpace} user={user} imageFile={imageFile} setPreview={setPreview} />
+        <EditSpacePreview formData={formData} selectedFile={selectedFile} setEditSpace={setEditSpace} user={user} imageFile={imageFile} setPreview={setPreview} space={space}/>
     ) : (
         <div className='w-[100%]  py-12 '>
 
@@ -179,9 +178,7 @@ const user=session?.user
                         )}
                         <div className="flex items-center justify-between">
                             <Button variant={'outline'} onClick={() => setEditSpace(false)}>Cancel</Button>
-                            <Button className='flex items-center gap-2' type="submit">
-                                <Eye size={18} /> Preview
-                            </Button>
+                            <Button className='flex items-center gap-2' type="submit"> <Eye size={18} /> Preview</Button>
                         </div>
                     </form>
                 </Form>

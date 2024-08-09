@@ -14,6 +14,7 @@ export const SpaceSchema = z.object({
   ConsentStatement: z.string().min(1, { message: "Consent statement is required" }),
   thankyouPageTitle: z.string().min(1, { message: "Thank you page title is required" }),
   thankyouPageText: z.string().min(1, { message: "Thank you page text is required" }),
+  public_id:z.string().optional()
 });
 
 
@@ -22,7 +23,7 @@ name:string,
 image: string,
 title: string,
 description: string,
-isDarkTheme: string,
+isDarkTheme: boolean,
 buttonText:string,
 ConsentStatement: string,
 thankyouPageTitle: string,
@@ -30,6 +31,7 @@ thankyouPageText:string,
 sticker:string,
 _id:string,
 createdAt:string,
+public_id: string;
 messages:Message[],
 owner:string
 }

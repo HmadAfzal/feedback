@@ -12,7 +12,7 @@ import {
 import { Button } from './ui/button'
 import { toast } from './ui/use-toast'
 
-const SpaceHeader = ({space, h, w, bg, p}:{space: Space, h:number, w:number, bg:string, p:string}) => {
+const SpaceHeader = ({space, h, w, bg, p}:{space: Space, h:string, w:string, bg:string, p:string}) => {
     const baseUrl = `${window.location.protocol}//${window.location.host}`;
     const url=`${baseUrl}/u/${space?.name}`
 const handleCopyLink=(event: React.MouseEvent)=>{
@@ -26,7 +26,7 @@ const handleCopyLink=(event: React.MouseEvent)=>{
     return (
         <div className={` ${bg} ${p} w-full rounded-lg px-6 my-6 flex justify-between`}>
             <div className='flex items-center gap-6'>
-                <Avatar className={`h-${h} w-${w}`}>
+                <Avatar className={`h-16 w-16`}>
                     <AvatarImage src={space?.image} />
                     <AvatarFallback>pf</AvatarFallback>
                 </Avatar>

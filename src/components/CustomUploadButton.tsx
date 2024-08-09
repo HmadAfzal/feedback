@@ -29,7 +29,7 @@ const CustomUploadButton = ({ setSelectedFile, setLocalAvatarUrl }: { setSelecte
         style={{ display: 'none' }}
         onChange={handleFileChange}
       />
-      <Button onClick={handleButtonClick}>Change</Button>
+      <Button type="button" onClick={handleButtonClick}>Change</Button>
     </>
   );
 };

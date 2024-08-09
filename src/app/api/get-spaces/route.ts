@@ -17,7 +17,6 @@ if(!user){
     }
 
     const spaces=await SpaceModel.find({owner:user._id})
-console.log(spaces)
 return Response.json({success:true, spaces},{status:200})
 
 

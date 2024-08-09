@@ -26,48 +26,57 @@ const FormPreview = ({ formData, selectedFile, setCreateSpace, user, imageFile, 
     const createSpace = async () => {
         setLoading(true);
         try {
-            let imageUrl = '';
-            if (selectedFile) {
-                const formData = new FormData();
-                formData.append('file', selectedFile);
-                formData.append('upload_preset', 'testimonial');  // create an upload preset and enter it here
-
-                const response = await fetch(`https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`, {
-                    method: 'POST',
-                    body: formData,
-                });
-                const data = await response.json();
-                if (data.secure_url) {
-                    imageUrl = data.secure_url;
-                } else {
-                    throw new Error('Upload failed');
-                }
+          let imageUrl = '';
+          let publicId = ''; 
+      
+          if (selectedFile) {
+            const formData = new FormData();
+            formData.append('file', selectedFile);
+            formData.append('upload_preset', 'testimonial');
+      
+            const response = await fetch(
+              `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`,
+              {
+                method: 'POST',
+                body: formData,
+              }
+            );
+      
+            const data = await response.json();
+            if (data.secure_url) {
+              imageUrl = data.secure_url;
+              publicId = data.public_id; 
+            } else {
+              throw new Error('Upload failed');
             }
-            const response = await axios.post('/api/create-space', {
-                userId: user?.providerAccountId,
-                ...formData,
-                image: imageUrl
-            });
-            dispatch(addSpace(response?.data.space))
-            setCreateSpace(false);
-            console.log(response.data)
-            toast({
-                title: 'Success',
-                description: response?.data.message,
-            });
+          }
+      
+          const response = await axios.post('/api/create-space', {
+            userId: user?._id,
+            ...formData,
+            image: imageUrl,
+            public_id: publicId,
+          });
+      
+          dispatch(addSpace(response?.data.space));
+          setCreateSpace(false);
+      
+          toast({
+            title: 'Success',
+            description: response?.data.message,
+          });
         } catch (error: any) {
-            console.error('Error submitting form:', error);
-
-            toast({
-                title: 'Error',
-                description: error.response?.data?.message || 'An unexpected error occurred',
-                variant: 'destructive'
-            });
+          console.error('Error submitting form:', error);
+      
+          toast({
+            title: 'Error',
+            description: error.response?.data?.message || 'An unexpected error occurred',
+            variant: 'destructive',
+          });
         } finally {
-            setLoading(false);
+          setLoading(false);
         }
-    };
-
+      };
     return (
         <div className='w-[100%] py-8'>
          <div className='flex items-center justify-between pb-8'> 

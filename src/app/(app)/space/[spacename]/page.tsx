@@ -41,7 +41,7 @@ editSpace? <EditSpace setEditSpace={setEditSpace} space={space}/> :
             {
                 space && (
   <>
-   <SpaceHeader space={space} h={24} w={24} bg={"background"} p={'py-1'}/>
+   <SpaceHeader space={space} h={'24'} w={'24'} bg={"background"} p={'py-1'}/>
       <div className='flex w-full justify-end' >
         <Button className='flex items-center gap-3' onClick={()=>setEditSpace(true)}><Pen size={20}/>Edit Space</Button>
     </div>

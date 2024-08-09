@@ -5,8 +5,18 @@ import UserModel from "@/models/userModel";
 export async function POST(request: Request) {
     await dbConnect();
     try {
-        const { name, image, title, description, isDarkTheme, buttonText, ConsentStatement, thankyouPageTitle, thankyouPageText, userId } = await request.json();
-        if (!name || !title || !description || !thankyouPageTitle || !thankyouPageText || !buttonText || !ConsentStatement) {
+        const { name, image, public_id, title, description, isDarkTheme, buttonText, ConsentStatement, thankyouPageTitle, thankyouPageText, userId,
+        } = await request.json();
+
+        if (
+            !name ||
+            !title ||
+            !description ||
+            !thankyouPageTitle ||
+            !thankyouPageText ||
+            !buttonText ||
+            !ConsentStatement
+        ) {
             return Response.json(
                 {
                     success: false,
@@ -15,6 +25,7 @@ export async function POST(request: Request) {
                 { status: 400 }
             );
         }
+
         if (!userId) {
             return Response.json(
                 {
@@ -25,7 +36,7 @@ export async function POST(request: Request) {
             );
         }
 
-        const user = await UserModel.findOne({ providerAccountId: userId });
+        const user = await UserModel.findOne({ _id: userId });
         if (!user) {
             return Response.json(
                 {
@@ -47,10 +58,10 @@ export async function POST(request: Request) {
             );
         }
 
-
         const newSpace = await SpaceModel.create({
             name,
             image: image || user.profilepic,
+            public_id,
             title,
             description,
             isDarkTheme,
@@ -58,19 +69,22 @@ export async function POST(request: Request) {
             ConsentStatement,
             thankyouPageText,
             thankyouPageTitle,
-            owner: user._id
+            owner: user._id,
         });
+
         const space = await newSpace.save();
 
-        user.spaces.push(space._id)
+        user.spaces.push(space._id);
         await user.save();
-        return Response.json({
-            success: true,
-            space, 
-            message:'Space created successfully'
-        }, { status: 200 })
 
-
+        return Response.json(
+            {
+                success: true,
+                space,
+                message: 'Space created successfully',
+            },
+            { status: 200 }
+        );
     } catch (error) {
         console.log('Error in creating space', error);
         return Response.json(
@@ -82,3 +96,7 @@ export async function POST(request: Request) {
         );
     }
 }
+
+
+
+// https://media.giphy.com/media/8qD1FHjc4wllVBL3ln/giphy.gif?cid=ecf05e47gvya2nlu06oll65e05mxeg23paqfdhwynqmzbbyf&ep=v1_gifs_search&rid=giphy.gif&ct=g

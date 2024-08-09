@@ -33,7 +33,7 @@ const CreateSpace = ({ user, setCreateSpace }: { user: Session, setCreateSpace: 
             isDarkTheme: true,
             buttonText: 'Send in feedback',
             ConsentStatement: 'I give permission to use this feedback',
-            thankyouPageTitle: "Thank you 🧡",
+            thankyouPageTitle: "Thank you!",
             thankyouPageText: "Your feedback means a lot to us",
         },
     });

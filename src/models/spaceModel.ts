@@ -18,7 +18,7 @@ export interface Space extends Document {
   ConsentStatement: string;
   thankyouPageTitle: string;
   thankyouPageText: string;
-  sticker: string;
+  public_id: string;
   messages: Message[];
   owner: mongoose.Schema.Types.ObjectId;
 }
@@ -82,10 +82,7 @@ const SpaceSchema: Schema<Space> = new mongoose.Schema({
     required: true,
     default: 'Your feedback means a lot to us',
   },
-  sticker: {
-    type: String,
-    default: 'https://media.giphy.com/media/8qD1FHjc4wllVBL3ln/giphy.gif?cid=ecf05e47gvya2nlu06oll65e05mxeg23paqfdhwynqmzbbyf&ep=v1_gifs_search&rid=giphy.gif&ct=g',
-  },
+  public_id: { type: String },
   messages: [MessageSchema],
   owner: {
     type: mongoose.Schema.Types.ObjectId,

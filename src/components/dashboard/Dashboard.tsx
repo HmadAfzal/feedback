@@ -58,7 +58,7 @@ const Dashboard = ({ user, setCreateSpace }: { user: Session, setCreateSpace: (v
       {currentItems && currentItems.length > 0 ? (
         currentItems.map((space: Space) => (
           <Link href={`space/${space?.name}`} key={space?._id}>     
-        <SpaceHeader space={space} h={16} w={16} bg={'dark:bg-neutral-800 bg-neutral-200'} p={'py-5'}/>
+        <SpaceHeader space={space} h={'16'} w={'16'} bg={'dark:bg-neutral-800 bg-neutral-200'} p={'py-5'}/>
         </Link>
         ))
       ) : (

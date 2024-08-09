@@ -5,8 +5,8 @@ import UserModel from "@/models/userModel";
 export async function PUT(request: Request) {
     await dbConnect();
     try {
-        const { name, image, title, description, isDarkTheme, buttonText, ConsentStatement, thankyouPageTitle, thankyouPageText, userId } = await request.json();
-        console.log(userId)
+        const { name, image, title, description, isDarkTheme, buttonText, ConsentStatement, thankyouPageTitle, thankyouPageText, userId, publicId} = await request.json();
+
         if (!name || !title || !description || !thankyouPageTitle || !thankyouPageText || !buttonText || !ConsentStatement) {
             return Response.json(
                 {
@@ -20,7 +20,7 @@ export async function PUT(request: Request) {
             return Response.json(
                 {
                     success: false,
-                    message: 'user id is required',
+                    message: 'User id is required',
                 },
                 { status: 400 }
             );
@@ -37,7 +37,7 @@ export async function PUT(request: Request) {
             );
         }
 
-        const existingSpace = await SpaceModel.findOne({ owner:userId });
+        const existingSpace = await SpaceModel.findOne({ owner: userId });
         if (!existingSpace) {
             return Response.json(
                 {
@@ -47,8 +47,9 @@ export async function PUT(request: Request) {
                 { status: 403 }
             );
         }
+
         existingSpace.image = image || existingSpace.image;
-        existingSpace.name=name
+        existingSpace.name = name;
         existingSpace.title = title;
         existingSpace.description = description;
         existingSpace.isDarkTheme = isDarkTheme;
@@ -56,6 +57,10 @@ export async function PUT(request: Request) {
         existingSpace.ConsentStatement = ConsentStatement;
         existingSpace.thankyouPageTitle = thankyouPageTitle;
         existingSpace.thankyouPageText = thankyouPageText;
+
+        if (publicId) {
+            existingSpace.public_id = publicId;
+        }
 
         await existingSpace.save();
 
