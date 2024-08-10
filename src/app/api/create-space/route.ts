@@ -96,7 +96,3 @@ export async function POST(request: Request) {
         );
     }
 }
-
-
-
-// https://media.giphy.com/media/8qD1FHjc4wllVBL3ln/giphy.gif?cid=ecf05e47gvya2nlu06oll65e05mxeg23paqfdhwynqmzbbyf&ep=v1_gifs_search&rid=giphy.gif&ct=g

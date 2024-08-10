@@ -84,3 +84,13 @@ export async function PUT(request: Request) {
         );
     }
 }
+
+
+
+
+
+
+
+
+
+//sticker, delete route

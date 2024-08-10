@@ -200,7 +200,7 @@ const Main = ({ spaceData }: { spaceData: Space }) => {
                     <DialogContent className={`sm:max-w-[425px] border-none ${spaceData?.isDarkTheme ? 'bg-neutral-900 text-white' : 'bg-white text-black'}`}>
                         <DialogHeader>
                             <div className='flex w-full items-center justify-center'>
-                                <Image src={spaceData?.sticker} alt='img' height={300} width={300} className='rounded-lg'/>
+                                <Image src='https://media.giphy.com/media/8qD1FHjc4wllVBL3ln/giphy.gif?cid=ecf05e47gvya2nlu06oll65e05mxeg23paqfdhwynqmzbbyf&ep=v1_gifs_search&rid=giphy.gif&ct=g' alt='img' height={300} width={300} className='rounded-lg'/>
                             </div>
                             <DialogTitle className='text-center font-bold text-xl text-[#EA580C]'>{spaceData?.thankyouPageTitle}</DialogTitle>
                             <DialogDescription className='text-center'>

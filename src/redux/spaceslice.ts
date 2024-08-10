@@ -28,10 +28,13 @@ export const spaceSlice = createSlice({
     clearSpaceSlice: (state) => {
       state.space = null;
     },
+    deleteSpace:(state, action: PayloadAction<string>)=>{
+      state.space = state.space?.filter((space) => space._id !== action.payload) || null;
+    }
   },
 });
 
-export const { selectSpaces, addSpace, clearSpaceSlice } = spaceSlice.actions;
+export const { selectSpaces, addSpace, clearSpaceSlice, deleteSpace } = spaceSlice.actions;
 
 export const getSpaces = (state: RootState) => state.space?.space;
 
