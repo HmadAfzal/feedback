@@ -16,13 +16,13 @@ if(!user){
     return Response.json({success:false, message:"unauthorzed - user not found"},{status:404})  
     }
 
-    const spaces=await SpaceModel.find({owner:user._id})
+    const spaces=await SpaceModel.find({owner:user._id}).populate('messages')
 return Response.json({success:true, spaces},{status:200})
 
 
 } catch (error) {
         console.log(error)
-        return Response.json({success:false, message:"Error fetching user"},{status:500})
+        return Response.json({success:false, message:"Error fetching spaces"},{status:500})
 
     }
 }

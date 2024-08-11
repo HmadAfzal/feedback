@@ -1,12 +1,12 @@
 import { dbConnect } from "@/lib/dbConnect";
+import MessageModel from "@/models/MessageModel";
 import SpaceModel from "@/models/spaceModel";
-import { Message } from "@/schemas/Message";
 import { validateEmail } from "@/utils/validemail";
 
 export async function POST(request:Request) {
     await dbConnect();
     try {
-        const {name, email, feedback, spaceId, image}= await request.json();
+        const {name, email, feedback, spaceId, image, publicId}= await request.json();
 if(!name || !email || !feedback){
     return Response.json({success:false, message:'Please Enter all the fields'},{status:400})
 }
@@ -23,14 +23,19 @@ if(!space){
         return Response.json({success:false, message:'Space not found'},{status:400})
 }
 
-const newMessage={
+const newMessage=await MessageModel.create({
     feedback,
     name,
     email,
-    image: image
-   }
+    image: image,
+    space: space._id,
+    public_id:publicId || ''
+   })
 
-   space.messages.push(newMessage as Message);
+   const message=await newMessage.save()
+
+   space.messages.push(message._id);
+
    await space.save();
    return Response.json({success:true, message:"Message sent successfully"},{status:200}) 
 

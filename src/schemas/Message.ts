@@ -6,7 +6,10 @@ export interface Message {
     email: string;
     image?: string;
     _id:string;
-    createdAt:string
+    createdAt:string;
+    isLiked:boolean;
+    public_id:string;
+    space:string;
   }
   
 

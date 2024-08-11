@@ -1,12 +1,9 @@
 import mongoose, { Document, Schema } from 'mongoose';
 import UserModel from './userModel';
+import { Message } from './MessageModel';
+import { MessageSchema } from '@/schemas/Message';
 
-export interface Message extends Document {
-  feedback: string;
-  name: string;
-  email: string;
-  image: string;
-}
+
 
 export interface Space extends Document {
   name: string;
@@ -19,26 +16,11 @@ export interface Space extends Document {
   thankyouPageTitle: string;
   thankyouPageText: string;
   public_id: string;
-  messages: Message[];
+  messages: mongoose.Schema.Types.ObjectId[];
   owner: mongoose.Schema.Types.ObjectId;
 }
 
-const MessageSchema: Schema<Message> = new mongoose.Schema({
-  name: {
-    type: String,
-    required: [true, 'name is required'],
-  },
-  feedback: {
-    type: String,
-    required: [true, 'feedback is required'],
-  },
-  email: {
-    type: String,
-  },
-  image: {
-    type: String,
-  },
-}, { timestamps: true });
+
 
 
 const SpaceSchema: Schema<Space> = new mongoose.Schema({
@@ -83,7 +65,12 @@ const SpaceSchema: Schema<Space> = new mongoose.Schema({
     default: 'Your feedback means a lot to us',
   },
   public_id: { type: String },
-  messages: [MessageSchema],
+  messages: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Message',
+    },
+  ],
   owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',

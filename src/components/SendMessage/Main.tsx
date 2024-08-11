@@ -40,6 +40,7 @@ const Main = ({ spaceData }: { spaceData: Space }) => {
         setLoading(true);
         try {
             let imageUrl = '';
+            let publicId='';
             if (selectedFile) {
                 const formData = new FormData();
                 formData.append('file', selectedFile);
@@ -52,6 +53,7 @@ const Main = ({ spaceData }: { spaceData: Space }) => {
                 const data = await response.json();
                 if (data.secure_url) {
                     imageUrl = data.secure_url;
+                    publicId = data.public_id;
                 } else {
                     throw new Error('Upload failed');
                 }
@@ -60,7 +62,8 @@ const Main = ({ spaceData }: { spaceData: Space }) => {
                 const response = await axios.post('/api/send-message', {
                     spaceId: spaceData?._id,
                     ...data,
-                    image: imageUrl
+                    image: imageUrl,
+                    publicId:publicId
                 });
                 toast({
                     title: 'Success',

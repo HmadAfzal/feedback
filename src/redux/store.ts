@@ -2,6 +2,7 @@ import { configureStore, combineReducers } from '@reduxjs/toolkit'
 import { persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import spaceReducer from './spaceslice'
+import messageReducer from './messageslice'
 
 const persistConfig = {
   key: 'root',
@@ -10,7 +11,8 @@ const persistConfig = {
 }
 
 const rootReducer = combineReducers({
-  space: spaceReducer
+  space: spaceReducer,
+  message:messageReducer
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
