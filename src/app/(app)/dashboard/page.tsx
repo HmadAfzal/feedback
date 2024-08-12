@@ -17,6 +17,7 @@ const page = () => {
       try {
         const response = await axios.get('/api/get-spaces')
         dispatch(selectSpaces(response?.data.spaces))
+        console.log(response?.data.spaces)
       } catch (error) {
         console.log(error)
       }

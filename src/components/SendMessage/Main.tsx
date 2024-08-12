@@ -17,6 +17,8 @@ import CustomUploadButton from '../CustomUploadButton';
 import { toast } from '../ui/use-toast';
 import axios from 'axios';
 import Image from 'next/image';
+import { useAppDispatch } from '@/redux/hooks';
+import { addMessage } from '@/redux/messageslice';
 
 const Main = ({ spaceData }: { spaceData: Space }) => {
     const [imageFile, setImageFile] = useState();
@@ -25,7 +27,7 @@ const Main = ({ spaceData }: { spaceData: Space }) => {
     const [loading, setLoading] = useState(false);
     const [showFormDialog, setShowFormDialog] = useState(false);
     const [showThankYouDialog, setShowThankYouDialog] = useState(false);
-
+const dispatch=useAppDispatch()
     const form = useForm<z.infer<typeof MessageSchema>>({
         resolver: zodResolver(MessageSchema),
         defaultValues: {
@@ -65,6 +67,7 @@ const Main = ({ spaceData }: { spaceData: Space }) => {
                     image: imageUrl,
                     publicId:publicId
                 });
+                dispatch(addMessage(response?.data.newMessage))
                 toast({
                     title: 'Success',
                     description: response?.data.message,

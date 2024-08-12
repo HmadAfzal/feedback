@@ -16,7 +16,7 @@ if(!user){
     return Response.json({success:false, message:"unauthorzed - user not found"},{status:404})  
     }
 
-    const spaces=await SpaceModel.find({owner:user._id}).populate('messages')
+    const spaces=await SpaceModel.find({owner:user._id});
 return Response.json({success:true, spaces},{status:200})
 
 

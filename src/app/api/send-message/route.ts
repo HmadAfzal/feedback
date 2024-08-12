@@ -23,7 +23,7 @@ if(!space){
         return Response.json({success:false, message:'Space not found'},{status:400})
 }
 
-const newMessage=await MessageModel.create({
+const message=await MessageModel.create({
     feedback,
     name,
     email,
@@ -32,13 +32,13 @@ const newMessage=await MessageModel.create({
     public_id:publicId || ''
    })
 
-   const message=await newMessage.save()
+   const newMessage=await message.save()
 
-   space.messages.push(message._id);
+   space.messages.push(newMessage._id);
 
    await space.save();
-   return Response.json({success:true, message:"Message sent successfully"},{status:200}) 
-
+   return Response.json({ success: true, newMessage, message: 'Message sent successfully'},{ status: 200 });
+   
     } catch (error) {
         console.log(error)
         return Response.json({success:false, message:"Error sending message"},{status:500})
