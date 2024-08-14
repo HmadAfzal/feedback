@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Delete, Heart, Loader2, Trash2 } from 'lucide-react';
-import { Message } from '@/schemas/Message';
+import { Heart, Loader2, Trash2 } from 'lucide-react';
 import axios from 'axios';
-import { Space } from '@/schemas/Space';
 import {
   Dialog,
   DialogContent,
@@ -16,10 +14,20 @@ import { Button } from './ui/button';
 import { useAppDispatch } from '@/redux/hooks';
 import { deleteMessage } from '@/redux/messageslice';
 import { formatTime } from '@/utils/formattime';
-const MessageComponent = ({ message}: { message: Message}) => {
+import { IoIosArrowDown } from "react-icons/io";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Message } from '@/schemas/Message';
+
+const MessageComponent = ({ message }: { message: Message }) => {
   const [loading, setLoading] = useState(false);
   const [isLiked, setIsLiked] = useState(message.isLiked);
   const dispatch = useAppDispatch();
+  const [showDeleteDialog, setShowDeleteDialog] = useState(false);
 
   useEffect(() => {
     setIsLiked(message.isLiked);
@@ -29,9 +37,9 @@ const MessageComponent = ({ message}: { message: Message}) => {
     try {
       const response = await axios.put('/api/like-message', { messageId });
       console.log(response?.data);
-      setIsLiked((prevIsLiked) => !prevIsLiked);
-    } catch (error: any) {
-      console.log('error liking post: ', error);
+      setIsLiked((prevIsLiked: boolean) => !prevIsLiked);
+    } catch (error) {
+      console.log('Error liking message:', error);
     }
   };
 
@@ -43,63 +51,90 @@ const MessageComponent = ({ message}: { message: Message}) => {
       }
       await axios.delete('/api/delete-message', { data: { messageId } });
       dispatch(deleteMessage(messageId));
-    } catch (error: any) {
-      console.log('error deleting post: ', error);
+    } catch (error) {
+      console.log('Error deleting message:', error);
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div key={message._id} className='w-full dark:bg-neutral-800 bg-neutral-200 rounded-lg p-8 my-4'>
-      <div className='w-full flex items-center justify-between pb-4'>
-        <div className='flex items-center gap-3'>
+    <div
+      key={message._id}
+      className="w-full bg-neutral-100 dark:bg-neutral-900 rounded-lg p-6 my-4 shadow-lg"
+    >
+      <div className="w-full flex items-center justify-between pb-4">
+        <div className="flex items-center gap-4">
           {message.image && (
-            <Avatar className='h-12 w-12'>
+            <Avatar className="h-12 w-12">
               <AvatarImage src={message?.image} />
               <AvatarFallback>pf</AvatarFallback>
             </Avatar>
           )}
-          <h3 className='font-bold'>{message?.name}</h3>
+          <h3 className="font-semibold text-lg text-primary-foreground">
+            {message?.name}
+          </h3>
         </div>
-        <div className=' flex items-center gap-4'>
-          <div onClick={() => handleMessageLike(message._id)}>
-            <Heart
-              size={24}
-              style={{ fill: isLiked ? "red" : "transparent", stroke: isLiked ? "red" : 'white' }}
-              className='cursor-pointer'
-            />
-          </div>
-          <Dialog>
-            <DialogTrigger asChild>
-              <div className='cursor-pointer'><Trash2 size={24} color='red' /></div>
-            </DialogTrigger>
-            <DialogContent className="sm:max-w-md border-none">
-              <DialogHeader>
-                <DialogTitle>Are you sure?</DialogTitle>
-                <DialogDescription>
-                  Once deleted it cannot be retrieved
-                </DialogDescription>
-              </DialogHeader>
-              <Button
-                type="button"
-                size="sm"
-                className="px-3 flex items-center gap-2"
-                onClick={() => handleDeleteMessage(message._id, message?.public_id)}
-              >
-                {loading ? <><Loader2 className='animate-spin' /></> : <> <Trash2 size={16} /> Delete </>}
-              </Button>
-            </DialogContent>
-          </Dialog>
+<div className='flex items-center gap-3'>
+<Button variant="link" size="icon" onClick={() => handleMessageLike(message?._id)}>
+              <Heart className="text-primary" fill={isLiked ? '#EA580C' : 'transparent'}/>
+            </Button>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="link" size="icon">
+              <IoIosArrowDown className="text-muted-foreground" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end" className="border-none p-2 mx-0">
+            <DropdownMenuItem
+              className="cursor-pointer text-destructive"
+              onClick={() => setShowDeleteDialog(true)}
+            >
+              Delete
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
         </div>
       </div>
-      <div>
-        <p className='tracking-wide leading-7 pb-4 w-[90%]'>{message?.feedback}</p>
+      <div className="py-4">
+        <p className='tracking-wide leading-relaxed pb-4 w-[90%]'>{message?.feedback}</p>
       </div>
-      <div className='w-full flex items-center justify-between '>
-        <p className='font-semibold'>Email: <span className='font-normal dark:text-neutral-300 text-neutral-800'>{message?.email}</span></p>
-        <p className='font-semibold'>Submitted At: <span className='font-normal dark:text-neutral-300 text-neutral-800'>{formatTime(message?.createdAt)}</span></p>
+      <div className="w-full flex items-center justify-between text-sm">
+        <p className="font-semibold">
+          Email:{' '}
+          <span className="font-medium text-muted-foreground">{message?.email}</span>
+        </p>
+        <p className="font-semibold">
+          Submitted At:{' '}
+          <span className="font-medium text-muted-foreground">
+            {formatTime(message?.createdAt)}
+          </span>
+        </p>
       </div>
+
+      <Dialog open={showDeleteDialog} onOpenChange={(open) => setShowDeleteDialog(open)}>
+        <DialogContent
+          className="sm:max-w-md border-none rounded-lg"
+          onClick={(event: React.MouseEvent) => {
+            event.stopPropagation();
+          }}
+        >
+          <DialogHeader>
+            <DialogTitle>Are you sure?</DialogTitle>
+            <DialogDescription>
+              Once deleted, it cannot be retrieved.
+            </DialogDescription>
+          </DialogHeader>
+          <Button
+            type="button"
+            size="sm"
+            className="px-3 flex items-center gap-2"
+            onClick={() => handleDeleteMessage(message?._id, message?.public_id)}
+          >
+            {loading ? <Loader2 className="animate-spin" /> : <> <Trash2 size={16} /> Delete</>}
+          </Button>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };

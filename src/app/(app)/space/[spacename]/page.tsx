@@ -17,6 +17,7 @@ import EditSpace from '@/components/space/EditSpace'
 import MessageComponent from '@/components/MessageComponent'
 import axios from 'axios'
 import { getMessages, selectMessages } from '@/redux/messageslice'
+import Sidebar from '@/components/space/sidebar'
 
 const Page = () => {
     const spaces = useAppSelector(getSpaces)
@@ -97,18 +98,8 @@ const Page = () => {
                         </div>
                     ) : (
                         <div className='w-full h-[60vh] flex'>
-                            <div className='w-[15%] p-4'>
-                                <div className='pb-4'>
-                                    <h4 className='font-bold text-lg pb-2 cursor-pointer'>Messages</h4>
-                                    <p className='font-normal text-sm hover:underline cursor-pointer'>All</p>
-                                    <p className='font-normal text-sm hover:underline cursor-pointer'>Liked</p>
-                                </div>
-                                <div className='pb-4'>
-                                    <h4 className='font-bold text-lg pb-2 cursor-pointer'>Integrations</h4>
-                                    <p className='font-normal text-sm hover:underline cursor-pointer'>Embed to your site</p>
-                                </div>
-                            </div>
-                            <div className='w-[85%]'>
+<Sidebar/>
+<div className='w-[80%]'>
                                 <div className='p-4 w-full flex items-center justify-end'>
                                     <h4 className='text-left'>{messages && messages.length} Messages</h4>
                                 </div>

@@ -1,12 +1,18 @@
+import { Metadata } from "next"
 
-interface RootLayoutProps {
-  children: React.ReactNode;
+export const metadata: Metadata = {
+  title: "Examples",
+  description: "Check out some examples app built using the components.",
 }
 
-export default async function RootLayout({ children }: RootLayoutProps) {
+interface ExamplesLayoutProps {
+  children: React.ReactNode
+}
+
+export default function ExamplesLayout({ children }: ExamplesLayoutProps) {
   return (
-    <div className="w-[30%] container h-screen">
-      {children}
-    </div>
-  );
+    <div className="container w-[20%]">
+          {children}
+        </div>
+  )
 }
