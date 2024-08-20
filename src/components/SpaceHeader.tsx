@@ -103,7 +103,7 @@ const router=useRouter()
     return (
         <div className={`${bg} ${p} w-full rounded-lg px-6 my-6 flex justify-between`}>
             <div className='flex items-center gap-6'>
-                <Avatar className='h-16 w-16'>
+                <Avatar className={`${h} ${w}`}>
                     <AvatarImage src={space?.image} />
                     <AvatarFallback>pf</AvatarFallback>
                 </Avatar>

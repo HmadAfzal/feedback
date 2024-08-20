@@ -23,7 +23,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Message } from '@/schemas/Message';
 
-const MessageComponent = ({ message }: { message: Message }) => {
+const MessageComponent = ({ message,setLikeMessage, likeMessage }: { message: Message, setLikeMessage:(option:boolean)=>void, likeMessage:boolean}) => {
   const [loading, setLoading] = useState(false);
   const [isLiked, setIsLiked] = useState(message.isLiked);
   const dispatch = useAppDispatch();
@@ -38,6 +38,7 @@ const MessageComponent = ({ message }: { message: Message }) => {
       const response = await axios.put('/api/like-message', { messageId });
       console.log(response?.data);
       setIsLiked((prevIsLiked: boolean) => !prevIsLiked);
+      setLikeMessage(!likeMessage)
     } catch (error) {
       console.log('Error liking message:', error);
     }
@@ -71,7 +72,7 @@ const MessageComponent = ({ message }: { message: Message }) => {
               <AvatarFallback>pf</AvatarFallback>
             </Avatar>
           )}
-          <h3 className="font-semibold text-lg text-primary-foreground">
+          <h3 className="font-semibold text-lg">
             {message?.name}
           </h3>
         </div>
@@ -96,8 +97,8 @@ const MessageComponent = ({ message }: { message: Message }) => {
         </DropdownMenu>
         </div>
       </div>
-      <div className="py-4">
-        <p className='tracking-wide leading-relaxed pb-4 w-[90%]'>{message?.feedback}</p>
+      <div className="py-4 w-[80%]">
+        <p className='tracking-wide leading-relaxed pb-4'>{message?.feedback}</p>
       </div>
       <div className="w-full flex items-center justify-between text-sm">
         <p className="font-semibold">

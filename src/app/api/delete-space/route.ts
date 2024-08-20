@@ -6,8 +6,7 @@ export async function DELETE(request:Request) {
     await dbConnect();
     try {
         const {spaceId, owner}=await request.json();
-        console.log('spaceId: ', spaceId)
-        console.log('Owner: ', owner)
+  
  if(!spaceId || !owner){
     return Response.json({
         success:false, message:"Some error occured"

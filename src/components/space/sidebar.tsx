@@ -1,12 +1,12 @@
 import { Globe2, Heart, Inbox } from 'lucide-react';
 import React, { useState } from 'react';
 
-const Sidebar = () => {
+const Sidebar = ({ setSideBarOption }: { setSideBarOption: (option: string) => void }) => {
   const [activeItem, setActiveItem] = useState('All');
 
   const menuItems = [
     {
-      title: 'Messages',
+      title: 'Inbox',
       options: [
         { name: 'All', id: 'all', icon: <Inbox size={18} /> },
         { name: 'Liked', id: 'liked', icon: <Heart size={18} /> },
@@ -20,11 +20,16 @@ const Sidebar = () => {
     },
   ];
 
+  const handleSetItems = (option: string) => {
+    setActiveItem(option);
+    setSideBarOption(option);  // Pass the selected option to the parent component
+  };
+
   return (
     <div className="w-[20%] p-6">
       {menuItems.map((menu, index) => (
         <div key={index} className="mb-8">
-          <h4 className="font-semibold text-lg pb-4 text-card-foreground border-b border-muted">
+          <h4 className="font-semibold text-lg pb-4 text-card-foreground ">
             {menu.title}
           </h4>
           <div className="mt-4 space-y-2">
@@ -37,7 +42,7 @@ const Sidebar = () => {
                     ? 'bg-primary text-primary-foreground shadow-inner'
                     : 'hover:bg-muted text-muted-foreground hover:pl-5'
                 }`}
-                onClick={() => setActiveItem(option.name)}
+                onClick={() => handleSetItems(option.name)}
               >
                 <span className="mr-3">{option.icon}</span>
                 {option.name}
