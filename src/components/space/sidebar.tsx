@@ -1,7 +1,11 @@
-import { Globe2, Heart, Inbox } from 'lucide-react';
+import { Globe2, Heart, Inbox, NotebookText } from 'lucide-react';
 import React, { useState } from 'react';
 
-const Sidebar = ({ setSideBarOption }: { setSideBarOption: (option: string) => void }) => {
+interface SidebarProps {
+  setSideBarOption: (option: string) => void;
+}
+
+const Sidebar: React.FC<SidebarProps> = ({ setSideBarOption }) => {
   const [activeItem, setActiveItem] = useState('All');
 
   const menuItems = [
@@ -16,20 +20,21 @@ const Sidebar = ({ setSideBarOption }: { setSideBarOption: (option: string) => v
       title: 'Integrations',
       options: [
         { name: 'Embed to your site', id: 'embed', icon: <Globe2 size={18} /> },
+        { name: 'Get API', id: 'getapi', icon: <NotebookText size={18} /> },
       ],
     },
   ];
 
   const handleSetItems = (option: string) => {
     setActiveItem(option);
-    setSideBarOption(option);  // Pass the selected option to the parent component
+    setSideBarOption(option);
   };
 
   return (
     <div className="w-[20%] p-6">
       {menuItems.map((menu, index) => (
         <div key={index} className="mb-8">
-          <h4 className="font-semibold text-lg pb-4 text-card-foreground ">
+          <h4 className="font-semibold text-lg pb-4 text-card-foreground">
             {menu.title}
           </h4>
           <div className="mt-4 space-y-2">

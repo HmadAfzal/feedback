@@ -11,7 +11,8 @@ import {
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { formatTime } from "@/utils/formattime";
 import Script from 'next/script';
-import { PlainMessage } from '@/app/embed/page';
+import { PlainMessage } from '@/app/embed/[spaceId]/page';
+
 
 
 interface EmbedCarouselProps {
@@ -47,8 +48,8 @@ const EmbedCarousel: React.FC<EmbedCarouselProps> = ({ messages }) => {
     >
       <Script src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/4.3.2/iframeResizer.contentWindow.min.js" />
 
-      <Carousel className="w-[80vw]">
-        <CarouselContent className="flex gap-4 px-8">
+      <Carousel className="w-[90vw]">
+        <CarouselContent className="flex gap-4 px-8 justify-center">
           {filteredMessages.length === 0 ? (
             <div>No feedbacks available</div>
           ) : (

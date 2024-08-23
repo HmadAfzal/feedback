@@ -8,6 +8,9 @@ export async function GET(request: Request, { params }: { params: { spacename: s
     const { spacename } = params;
 
     try {
+        if (!spacename) {
+            return Response.json({success:false, message:"Missing requird query parameters"},{status:404})
+        }
         const space = await SpaceModel.findOne({ name: spacename })
         if (!space) {
             return Response.json({success:false, message:"Space not found"},{status:404})

@@ -4,6 +4,8 @@ import { Badge } from "@/components/ui/badge"
 import axios from 'axios';
 import CodeBlock from '../CodeBlock';
 import { Button } from '../ui/button';
+import { toast } from '../ui/use-toast';
+import { Loader2 } from 'lucide-react';
 
 const EmbedToSite = ({ spaceId }: { spaceId: string }) => {
     const [embedCode, setEmbedCode] = useState<string | null>(null);
@@ -11,9 +13,10 @@ const EmbedToSite = ({ spaceId }: { spaceId: string }) => {
     const [bgColor, setBgColor] = useState('#ffffff');
     const [cardBgColor, setCardBgColor] = useState('#f1f1f1');
     const [textColor, setTextColor] = useState('#000000');
-
+const [loading, setLoading]=useState(false)
     const handleEmbedClick = async () => {
         try {
+            setLoading(true)
             const response = await axios.get(`/api/generate-embed-code`, {
                 params: {
                     spaceId,
@@ -24,8 +27,15 @@ const EmbedToSite = ({ spaceId }: { spaceId: string }) => {
                 },
             });
             setEmbedCode(response.data.embedCode);
-        } catch (error) {
+        } catch (error: any) {
             console.error('Error generating embed code:', error);
+            toast({
+                title:'Error',
+                description:'Error in generating embed code',
+                variant:'destructive'
+            })
+        } finally{
+            setLoading(false)
         }
     };
 
@@ -69,7 +79,7 @@ const EmbedToSite = ({ spaceId }: { spaceId: string }) => {
 
                         <div className=' w-[70%] h-full'><CodeBlock code={embedCode ? embedCode : '//After generation your code will appear here'} /></div>
                     </div>
-                    <Button onClick={handleEmbedClick}>Generate Code</Button>
+                    <Button disabled={loading} onClick={handleEmbedClick}>{ loading ?<div className='flex items-center gap-3'><Loader2 className='animate-spin' size={18}/>Generating code for you</div> : 'Generate Code'}</Button>
                 </div>
 
             </ScrollArea>
