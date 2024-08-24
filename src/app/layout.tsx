@@ -5,7 +5,6 @@ import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 import Authprovider from "@/context/Authprovider";
 import { ThemeProvider } from "@/components/theme-provider";
-import Nav from "@/components/nav/Nav";
 import ReduxProvider from "@/context/ReduxProvider";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -27,7 +26,7 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </head>
       <body className={inter.className}>
-        <div className="w-full flex items-center justify-center py-2 bg-primary">Feedback is currently in beta</div>
+        {/* <div className="w-full flex items-center justify-center py-2 bg-primary">Feedback is currently in beta</div> */}
         <Authprovider>
           <ThemeProvider
             attribute="class"

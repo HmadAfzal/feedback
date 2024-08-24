@@ -76,9 +76,9 @@ const MessageComponent = ({ message,setLikeMessage, likeMessage }: { message: Me
             {message?.name}
           </h3>
         </div>
-<div className='flex items-center gap-3'>
+<div className='flex items-center md:gap-3 '>
 <Button variant="link" size="icon" onClick={() => handleMessageLike(message?._id)}>
-              <Heart className="text-primary" fill={isLiked ? '#EA580C' : 'transparent'}/>
+              <Heart className="text-primary md:size-6 size-5" fill={isLiked ? '#EA580C' : 'transparent'}/>
             </Button>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -97,10 +97,10 @@ const MessageComponent = ({ message,setLikeMessage, likeMessage }: { message: Me
         </DropdownMenu>
         </div>
       </div>
-      <div className="py-4 w-[80%]">
-        <p className='tracking-wide leading-relaxed pb-4'>{message?.feedback}</p>
+      <div className="py-4 md:w-[80%] sm:w-[90%] w-[95%]">
+        <p className='tracking-wide leading-relaxed pb-4 md:text-lg text-sm'>{message?.feedback}</p>
       </div>
-      <div className="w-full flex items-center justify-between text-sm">
+      <div className="w-full flex md:flex-row flex-col gap-3 items-start justify-between text-sm">
         <p className="font-semibold">
           Email:{' '}
           <span className="font-medium text-muted-foreground">{message?.email}</span>

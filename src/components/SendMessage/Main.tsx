@@ -89,27 +89,34 @@ const dispatch=useAppDispatch()
     };
 
     return (
-        <div className={`${spaceData?.isDarkTheme ? 'bg-neutral-900 text-white' : 'bg-white text-black'} p-12 h-screen px-20 flex items-center justify-center`}>
-            <div className='w-[70%]'>
-                <div className='flex flex-col items-center justify-center gap-6 pb-2'>
-                    <Avatar className='h-36 w-36'>
-                        <AvatarImage src={spaceData?.image} />
-                        <AvatarFallback>img</AvatarFallback>
-                    </Avatar>
+        <div className={`${spaceData?.isDarkTheme ? 'bg-[#121212] text-white' : 'bg-white text-black'} p-8  min-h-screen flex items-center justify-center`}>
+  <div className="w-full max-w-[90%] md:max-w-[70%]">
+    <div className="flex flex-col items-center justify-center gap-6 pb-2">
+      <Avatar className="h-24 w-24 md:h-36 md:w-36">
+        <AvatarImage src={spaceData?.image} />
+        <AvatarFallback>img</AvatarFallback>
+      </Avatar>
 
-                    <h1 className='text-center font-bold text-5xl text-[#EA580C]'>{spaceData?.title}</h1>
-                    <p className='text-center tracking-wide px-10 text-xl'>{spaceData?.description}</p>
-                </div>
-                <div className='pt-12 flex flex-col gap-6 pb-12'>
-                    <h3 className='font-semibold text-3xl'>Tips to write a <span className='text-[#EA580C]'>feedback</span></h3>
-                    <ul className='list-disc flex flex-col gap-2'>
-                        <li>Clearly identify what you are giving feedback about. Vague comments can be confusing and unhelpful.</li>
-                        <li>Focus on providing suggestions for improvement rather than just pointing out flaws.</li>
-                        <li>Base your feedback on observable behavior or specific outcomes rather than personal opinions or feelings.</li>
-                        <li>Consider the recipient's feelings and be respectful in your tone.</li>
-                        <li>If possible, follow up to see how the recipient is progressing and provide additional support or feedback as needed.</li>
-                    </ul>
-                </div>
+      <h1 className="text-center font-bold text-3xl md:text-4xl lg:text-5xl text-[#EA580C]">
+        {spaceData?.title}
+      </h1>
+      <p className="text-center tracking-wide px-4 md:px-10 text-lg md:text-xl">
+        {spaceData?.description}
+      </p>
+    </div>
+
+    <div className="pt-8 md:pt-12 flex flex-col gap-4 md:gap-6 pb-8 md:pb-12">
+      <h3 className="font-semibold text-2xl md:text-3xl">
+        Tips to write a <span className="text-[#EA580C]">feedback</span>
+      </h3>
+      <ul className="list-disc flex flex-col gap-2">
+        <li>Clearly identify what you are giving feedback about. Vague comments can be confusing and unhelpful.</li>
+        <li>Focus on providing suggestions for improvement rather than just pointing out flaws.</li>
+        <li>Base your feedback on observable behavior or specific outcomes rather than personal opinions or feelings.</li>
+        <li>Consider the recipient's feelings and be respectful in your tone.</li>
+        <li>If possible, follow up to see how the recipient is progressing and provide additional support or feedback as needed.</li>
+      </ul>
+    </div>
                 <Dialog open={showFormDialog} onOpenChange={(open) => setShowFormDialog(open)}>
                     <DialogTrigger asChild>
                         <Button className='w-full flex items-center gap-3'>
@@ -226,3 +233,8 @@ const dispatch=useAppDispatch()
 };
 
 export default Main;
+
+
+//remaining responsiveness
+//delete messages and their pictures when space is deleted
+//fix edit space error

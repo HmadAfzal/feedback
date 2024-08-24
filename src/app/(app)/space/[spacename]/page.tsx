@@ -1,23 +1,21 @@
-'use client';
-
+'use client'
+import React, { useState, useEffect } from 'react';
 import { Separator } from '@/components/ui/separator';
 import { useAppSelector } from '@/redux/hooks';
 import { getSpaces } from '@/redux/spaceslice';
-import { Loader2 } from 'lucide-react';
+import { Loader2, Menu, MenuSquare } from 'lucide-react';
 import { useParams } from 'next/navigation';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
-import React, { useEffect, useState } from 'react';
-import { Message } from '@/schemas/Message';
-import { Space } from '@/schemas/Space';
 import SpaceHeader from '@/components/SpaceHeader';
-import { Button } from '@/components/ui/button';
 import EditSpace from '@/components/space/EditSpace';
 import MessageComponent from '@/components/MessageComponent';
-import axios from 'axios';
 import Sidebar from '@/components/space/sidebar';
 import EmbedToSite from '@/components/space/EmbedToSite';
 import GetApi from '@/components/space/GetApi';
+import axios from 'axios';
+import { Space } from '@/schemas/Space';
+import { Message } from '@/schemas/Message';
 
 const Page = () => {
   const spaces = useAppSelector(getSpaces);
@@ -29,6 +27,7 @@ const Page = () => {
   const [sideBarOption, setSideBarOption] = useState('All');
   const [messages, setMessages] = useState<Message[]>([]);
   const [likeMessage, setLikeMessage] = useState<boolean>(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false); // New state for sidebar visibility
 
   useEffect(() => {
     if (spaces && spaces.length > 0) {
@@ -74,24 +73,31 @@ const Page = () => {
       {editSpace ? (
         <EditSpace setEditSpace={setEditSpace} space={space} />
       ) : (
-        <div>
+        <div >
           <Separator className='my-4' />
           {space && (
             <>
-              <SpaceHeader space={space} h={'h-24'} w={'w-24'} bg={'background'} p={'py-1'} />
-              <div className='flex w-full justify-end'>
-                <Button className='flex items-center gap-3' onClick={() => setEditSpace(true)}>
-                  Edit Space
-                </Button>
-              </div>
+              <SpaceHeader space={space} setEditSpace={setEditSpace} />
             </>
           )}
           <Separator className='mt-4' />
 
-          <div className='w-full h-[60vh] flex'>
-            <Sidebar setSideBarOption={setSideBarOption} />
+          <div className='w-full h-[60vh] flex items-start'>
+           
+            <button
+              className='lg:hidden block py-4 md:px-2 text-muted-foreground '
+              onClick={() => setSidebarOpen(!sidebarOpen)}
+            >
+              <Menu size={20} />
+            </button>
 
-            <div className='w-[80%]'>
+            <Sidebar
+              setSideBarOption={setSideBarOption}
+              sidebarOpen={sidebarOpen}
+              setSidebarOpen={setSidebarOpen}
+            />
+
+            <div className='w-full lg:w-[80%]'>
               {messageLoading ? (
                 <div className='w-full flex items-center justify-center py-40'>
                   <Loader2 className='animate-spin w-12 h-12 text-[#EA580C]' />
@@ -116,7 +122,7 @@ const Page = () => {
                   <div className='p-4 w-full flex items-center justify-end'>
                     <h4 className='text-left'>{messages.length} Messages</h4>
                   </div>
-                  <ScrollArea className='h-[62vh] w-full rounded-md px-12 py-4'>
+                  <ScrollArea className='md:h-[62vh] h-[65vh] w-full rounded-md md:px-12 md:py-4'>
                     {messages.map((message: Message) => (
                       <MessageComponent
                         message={message}

@@ -20,7 +20,7 @@ import {
 } from "@/components/ui/pagination";
 import { Space } from '@/schemas/Space';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
-import SpaceHeader from '../SpaceHeader';
+import SingleSpace from './SingleSpace';
 
 const Dashboard = ({ user, setCreateSpace }: { user: Session, setCreateSpace: (value: boolean) => void }) => {
   const spaces = useAppSelector(getSpaces) || [];
@@ -38,27 +38,27 @@ const Dashboard = ({ user, setCreateSpace }: { user: Session, setCreateSpace: (v
 
   return (
     <div>
-      <div className='flex items-center justify-start gap-5 mt-16'>
-        <Avatar className='h-32 w-32'>
+      <div className='flex items-center justify-start gap-5 my-16'>
+        <Avatar className='md:h-32 md:w-32 h-20 w-20'>
           <AvatarImage src={user?.profilepic} />
           <AvatarFallback>pf</AvatarFallback>
         </Avatar>
         <div className='flex flex-col gap-2'>
-          <h1 className='font-bold text-5xl'>{getFirstName(user?.username || '')}&apos;s Dashboard</h1>
-          <p className='font-normal text-lg'>{user?.email}</p>
+          <h1 className='font-bold text-3xl md:text-5xl'>{getFirstName(user?.username || '')}&apos;s Dashboard</h1>
+          <p className='font-normal md:text-lg text-sm'>{user?.email}</p>
         </div>
       </div>  
       <Separator className="my-12" />
       <div className='w-full flex items-center justify-between mb-6'>
-        <h2 className='font-bold text-3xl'>Spaces</h2>
-        <Button className='flex items-center justify-between gap-3' onClick={() => setCreateSpace(true)}>
-          <Rocket size={20} /> Create Space
-        </Button>
+        <h2 className='font-bold text-2xl md:text-3xl'>Spaces</h2>
+        <Button className='flex items-center justify-center md:gap-3 gap-2' onClick={() => setCreateSpace(true)}>
+  <Rocket  className='md:size-6 size-5' /> Create Space
+</Button>
       </div>
       {currentItems && currentItems.length > 0 ? (
         currentItems.map((space: Space) => (
           <Link href={`space/${space?.name}`} key={space?._id}>     
-        <SpaceHeader space={space} h={'h-16'} w={'w-16'} bg={'dark:bg-neutral-800 bg-neutral-200'} p={'py-5'}/>
+        <SingleSpace space={space}/>
         </Link>
         ))
       ) : (
