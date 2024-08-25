@@ -4,6 +4,7 @@ import { Link2, Pen } from 'lucide-react';
 import { Space } from '@/schemas/Space';
 import SpaceSettings from './SpaceSettings';
 import { Button } from './ui/button';
+import SpaceEdit from './space/SpaceEdit';
 
 const SpaceHeader = ({space, setEditSpace}: {space: Space, setEditSpace:(setEditSpace:boolean)=>void}) => {
     const baseUrl = `${window.location.protocol}//${window.location.host}`;
@@ -27,11 +28,7 @@ const SpaceHeader = ({space, setEditSpace}: {space: Space, setEditSpace:(setEdit
                 </div>
             </div>
             <div className='flex gap-4 items-center text-muted-foreground'>
-            <Button className=' md:flex items-center gap-3 hidden' onClick={() => setEditSpace(true)}>
-                 <Pen className='md:size-6 size-5'/>Edit Space
-                </Button>
-                
-                <Pen className='md:size-6 size-5 block md:hidden cursor-pointer' onClick={() => setEditSpace(true)} />
+            <SpaceEdit space={space}/>
           <SpaceSettings space={space} spaceUrl={spaceUrl}/>
           </div>
         </div>

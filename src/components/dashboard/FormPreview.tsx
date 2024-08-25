@@ -78,92 +78,47 @@ const FormPreview = ({ formData, selectedFile, setCreateSpace, user, imageFile, 
         }
       };
     return (
-      <div className="w-full py-8 px-4 md:px-8 lg:px-12">
-  <div className="flex flex-row items-center justify-between pb-8 gap-4">
-    <Button
-      onClick={() => setPreview(false)}
-      variant="outline"
-      className="flex items-center gap-2"
-    >
-      <ArrowLeft size={14} /> Back
-    </Button>
-    <Button
-      onClick={createSpace}
-      disabled={loading}
-      className="flex items-center gap-2"
-    >
-      {loading ? (
-        <>
-          <Loader2 className="animate-spin" size={18} /> Creating
-        </>
-      ) : (
-        <>
-          <Rocket size={20} /> Create Space
-        </>
-      )}
-    </Button>
-  </div>
+        <div className='w-[100%] py-8'>
+         <div className='flex items-center justify-between pb-8'> 
+         <Button onClick={()=>setPreview(false)} variant={'outline'} className='flex items-center gap-2'><ArrowLeft size={14}/> Back</Button>
+            <Button onClick={createSpace} disabled={loading} className='flex items-center gap-2' >
+                {loading ? <><Loader2 className='animate-spin' size={18}/>Creating</> : <><Rocket size={20}/> Create Space</>}
+            </Button>
+          
+            </div>
+        <div className={ 'dark:bg-neutral-800 text-white bg-neutral-100 p-12 rounded-lg shadow-lg overflow-hidden relative'}>
+            <div className=' bg-[#EA580C] text-white absolute top-0 left-0 px-4 py-1 text-center flex items-center gap-2 rounded-br-lg'><Eye size={18}/> <p>Live preview</p>
+            </div>
+            <div className='flex flex-col items-center justify-center gap-4'>
+                <Avatar className='h-24 w-24'>
+                    <AvatarImage src={imageFile ? imageFile : user?.profilepic} />
+                    <AvatarFallback>img</AvatarFallback>
+                </Avatar>
 
-  <div className="dark:bg-neutral-800 text-white bg-neutral-100 p-8 md:p-12 rounded-lg shadow-lg overflow-hidden relative">
-    <div className="bg-[#EA580C] text-white absolute top-0 left-0 px-2 md:px-4 py-1 text-center flex items-center gap-2 rounded-br-lg">
-    <Eye className='md:size-6 size-4' />
-    <p className='md:text-md text-sm'>Live preview</p>
-    </div>
-
-    <div className="flex flex-col items-center justify-center gap-4">
-      <Avatar className="h-20 w-20 md:h-24 md:w-24">
-        <AvatarImage src={imageFile ? imageFile : user?.profilepic} />
-        <AvatarFallback>img</AvatarFallback>
-      </Avatar>
-
-      <h1 className="text-center font-bold text-2xl md:text-3xl lg:text-4xl text-[#EA580C]">
-        {formData?.title}
-      </h1>
-      <p className="text-center tracking-wide px-4 md:px-8 lg:px-10">
-        {formData?.description}
-      </p>
-    </div>
-
-    <div className="pt-8 md:pt-12 flex flex-col gap-4">
-      <h3 className="font-semibold text-lg md:text-xl">
-        Tips to write a <span className="text-[#EA580C]">feedback</span>
-      </h3>
-      <ul className="list-disc px-4 md:px-8">
-        <li>
-          Clearly identify what you are giving feedback about. Vague comments
-          can be confusing and unhelpful.
-        </li>
-        <li>
-          Focus on providing suggestions for improvement rather than just
-          pointing out flaws.
-        </li>
-        <li>
-          Base your feedback on observable behavior or specific outcomes rather
-          than personal opinions or feelings.
-        </li>
-        <li>
-          Consider the recipient's feelings and be respectful in your tone.
-        </li>
-        <li>
-          If possible, follow up to see how the recipient is progressing and
-          provide additional support or feedback as needed.
-        </li>
-      </ul>
-    </div>
-
-    <div className="flex items-center space-x-2 py-8">
-      <Checkbox id="terms" />
-      <label htmlFor="terms" className="text-sm font-medium leading-none">
-        {formData?.ConsentStatement}
-      </label>
-    </div>
-
-    <Button className="w-full flex items-center gap-3">
-      <PenSquareIcon size={20} /> {formData?.buttonText}
-    </Button>
-  </div>
-</div>
-
+                <h1 className='text-center font-bold text-4xl text-[#EA580C]'>{formData?.title}</h1>
+                <p className='text-center tracking-wide px-10'>{formData?.description}</p>
+            </div>
+            <div className='pt-12 flex flex-col gap-4'>
+                <h3 className='font-semibold text-xl'>Tips to write a <span className='text-[#EA580C]'>feedback</span></h3>
+                <ul className='list-disc'>
+                <li>Clearly identify what you are giving feedback about. Vague comments can be confusing and unhelpful.</li>
+               <li>Focus on providing suggestions for improvement rather than just pointing out flaws.</li>
+               <li>Base your feedback on observable behavior or specific outcomes rather than personal opinions or feelings.</li>
+               <li> Consider the recipient's feelings and be respectful in your tone.</li>
+               <li>If possible, follow up to see how the recipient is progressing and provide additional support or feedback as needed.</li>
+                </ul>
+            </div>
+            <div className="flex items-center space-x-2 py-8">
+                <Checkbox id="terms" />
+                <label htmlFor="terms" className="text-sm font-medium leading-none">
+                    {formData?.ConsentStatement}
+                </label>
+            </div>
+            <Button className='w-full flex items-center gap-3'>
+                <PenSquareIcon size={20} /> {formData?.buttonText}
+            </Button>
+        </div>
+        </div>
     );
 };
 

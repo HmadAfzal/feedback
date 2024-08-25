@@ -5,9 +5,9 @@ import UserModel from "@/models/userModel";
 export async function PUT(request: Request) {
     await dbConnect();
     try {
-        const { name, image, title, description, isDarkTheme, buttonText, ConsentStatement, thankyouPageTitle, thankyouPageText, userId, publicId} = await request.json();
+        const { name, image, title, description,  userId, publicId} = await request.json();
 
-        if (!name || !title || !description || !thankyouPageTitle || !thankyouPageText || !buttonText || !ConsentStatement) {
+        if (!name || !title || !description) {
             return Response.json(
                 {
                     success: false,
@@ -52,15 +52,8 @@ export async function PUT(request: Request) {
         existingSpace.name = name;
         existingSpace.title = title;
         existingSpace.description = description;
-        existingSpace.isDarkTheme = isDarkTheme;
-        existingSpace.buttonText = buttonText;
-        existingSpace.ConsentStatement = ConsentStatement;
-        existingSpace.thankyouPageTitle = thankyouPageTitle;
-        existingSpace.thankyouPageText = thankyouPageText;
+        existingSpace.public_id = publicId || existingSpace.public_id
 
-        if (publicId) {
-            existingSpace.public_id = publicId;
-        }
 
         await existingSpace.save();
 
