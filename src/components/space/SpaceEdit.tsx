@@ -135,7 +135,7 @@ const SpaceEdit = ({ space }: { space: Space }) => {
                     <DialogHeader>
                         <DialogTitle>Edit space</DialogTitle>
                         <DialogDescription>
-                            Make changes to your space here. Click save when you're done.
+                            Make changes to your space here. Click save when you&apos;re done.
                         </DialogDescription>
                     </DialogHeader>
                     <ProfileForm
@@ -161,7 +161,7 @@ const SpaceEdit = ({ space }: { space: Space }) => {
                 <DrawerHeader className="text-left">
                     <DrawerTitle>Edit space</DrawerTitle>
                     <DrawerDescription>
-                        Make changes to your space here. Click save when you're done.
+                        Make changes to your space here. Click save when you&apos;re done.
                     </DrawerDescription>
                 </DrawerHeader>
                 <ProfileForm

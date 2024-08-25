@@ -139,7 +139,7 @@ const EditSpacePreview: React.FC<EditSpacePreviewProps> = ({
             <li>Clearly identify what you are giving feedback about. Vague comments can be confusing and unhelpful.</li>
             <li>Focus on providing suggestions for improvement rather than just pointing out flaws.</li>
             <li>Base your feedback on observable behavior or specific outcomes rather than personal opinions or feelings.</li>
-            <li>Consider the recipient's feelings and be respectful in your tone.</li>
+            <li>Consider the recipient&apos;s feelings and be respectful in your tone.</li>
             <li>If possible, follow up to see how the recipient is progressing and provide additional support or feedback as needed.</li>
           </ul>
         </div>
