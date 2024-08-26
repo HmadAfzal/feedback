@@ -7,7 +7,6 @@ export async function POST(request: Request) {
     try {
         const { name, image, public_id, title, description, isDarkTheme, buttonText, ConsentStatement, thankyouPageTitle, thankyouPageText, userId,
         } = await request.json();
-
         if (
             !name ||
             !title ||

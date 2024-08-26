@@ -67,6 +67,7 @@ const SpaceEdit = ({ space }: { space: Space }) => {
     });
 
     const onSubmit = async (data: z.infer<typeof EditSpaceSchema>) => {
+
         setLoading(true);
         try {
             if (selectedFile && space.public_id) {
@@ -101,8 +102,8 @@ const SpaceEdit = ({ space }: { space: Space }) => {
                 ...data,
                 image: imageUrl,
                 publicId: publicId,
+                spaceId:space._id
             });
-
             if (response.status === 200) {
                 const spacesResponse = await axios.get('/api/get-spaces');
                 dispatch(selectSpaces(spacesResponse?.data.spaces));

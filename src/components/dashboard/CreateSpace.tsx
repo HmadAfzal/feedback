@@ -39,6 +39,7 @@ const CreateSpace = ({ user, setCreateSpace }: { user: Session, setCreateSpace: 
     });
 
     const onSubmit = async (data: z.infer<typeof SpaceSchema>) => {
+
         setFormData(data);
         setPreview(true);
     };

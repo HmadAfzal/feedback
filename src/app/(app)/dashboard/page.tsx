@@ -8,7 +8,7 @@ import axios from 'axios';
 import { useAppDispatch } from '@/redux/hooks';
 import { selectSpaces } from '@/redux/spaceslice';
 
-const Page = () => {  
+const page = () => {  
   const [createSpace, setCreateSpace] = useState(false);
   const { data: session, status } = useSession();
   const dispatch = useAppDispatch();
@@ -18,7 +18,6 @@ const Page = () => {
       try {
         const response = await axios.get('/api/get-spaces');
         dispatch(selectSpaces(response?.data.spaces));
-        console.log(response?.data.spaces);
       } catch (error) {
         console.log(error);
       }
@@ -41,4 +40,4 @@ const Page = () => {
   );
 }
 
-export default Page;
+export default page;

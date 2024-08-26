@@ -5,8 +5,7 @@ import UserModel from "@/models/userModel";
 export async function PUT(request: Request) {
     await dbConnect();
     try {
-        const { name, image, title, description,  userId, publicId} = await request.json();
-
+        const { name, image, title, description,  userId, publicId, spaceId} = await request.json();
         if (!name || !title || !description) {
             return Response.json(
                 {
@@ -26,6 +25,17 @@ export async function PUT(request: Request) {
             );
         }
 
+        if (!spaceId) {
+            return Response.json(
+                {
+                    success: false,
+                    message: 'space id is required',
+                },
+                { status: 400 }
+            );
+        }
+
+
         const user = await UserModel.findOne({ _id: userId });
         if (!user) {
             return Response.json(
@@ -36,9 +46,21 @@ export async function PUT(request: Request) {
                 { status: 400 }
             );
         }
+        const existingspace = await SpaceModel.findOne({ name: name });
 
-        const existingSpace = await SpaceModel.findOne({ owner: userId });
-        if (!existingSpace) {
+        if (existingspace) {
+            return Response.json(
+                {
+                    success: false,
+                    message: 'Space with this name already exists',
+                },
+                { status: 400 }
+            );
+        }
+
+
+                const space = await SpaceModel.findOne({ _id: spaceId });
+        if (!space) {
             return Response.json(
                 {
                     success: false,
@@ -47,21 +69,20 @@ export async function PUT(request: Request) {
                 { status: 403 }
             );
         }
+        space.image = image || space.image;
+        space.name = name;
+        space.title = title;
+        space.description = description;
+        space.public_id = publicId || space.public_id
 
-        existingSpace.image = image || existingSpace.image;
-        existingSpace.name = name;
-        existingSpace.title = title;
-        existingSpace.description = description;
-        existingSpace.public_id = publicId || existingSpace.public_id
 
-
-        await existingSpace.save();
+        await space.save();
 
         return Response.json(
             {
                 success: true,
                 message: 'Space updated successfully',
-                space: existingSpace,
+                space: space,
             },
             { status: 200 }
         );
@@ -79,11 +100,3 @@ export async function PUT(request: Request) {
 }
 
 
-
-
-
-
-
-
-
-//sticker, delete route

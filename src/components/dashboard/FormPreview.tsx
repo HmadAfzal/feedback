@@ -46,6 +46,7 @@ const FormPreview = ({ formData, selectedFile, setCreateSpace, user, imageFile, 
             if (data.secure_url) {
               imageUrl = data.secure_url;
               publicId = data.public_id; 
+             
             } else {
               throw new Error('Upload failed');
             }
@@ -57,7 +58,6 @@ const FormPreview = ({ formData, selectedFile, setCreateSpace, user, imageFile, 
             image: imageUrl,
             public_id: publicId,
           });
-      
           dispatch(addSpace(response?.data.space));
           setCreateSpace(false);
       
