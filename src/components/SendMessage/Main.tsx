@@ -234,7 +234,3 @@ const dispatch=useAppDispatch()
 
 export default Main;
 
-
-//remaining responsiveness
-//delete messages and their pictures when space is deleted
-//fix edit space error

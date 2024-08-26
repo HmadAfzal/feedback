@@ -1,53 +1,53 @@
-'use client'
 
-import { Button } from '@/components/ui/button'
-import { toast } from '@/components/ui/use-toast';
-import { signIn } from 'next-auth/react';
-import Image from 'next/image'
-import Link from 'next/link';
-import React from 'react' 
-import { FaGoogle, FaGithub, FaDiscord } from "react-icons/fa";
-import { FaInstagram } from "react-icons/fa6";
+import Link from "next/link"
+import { cn } from "@/lib/utils"
+import { UserAuthForm } from "../components/user-auth-form"
+import { buttonVariants } from "@/components/ui/button"
 
-const page = () => {
-
-  const handleGithubSignin = async () => {
-    const result = await signIn('github', { redirect: false });
-    if (result?.error) {
-      toast({
-        title: 'Error',
-        description: result.error,
-        variant: 'destructive',
-      });
-    } 
-  };
-  
-  const handleGoogleSignin = async () => {
-    const result = await signIn('google', { redirect: false });
-    if (result?.error) {
-      toast({
-        title: 'Error',
-        description: result.error,
-        variant: 'destructive',
-      });
-    }
-  };
-
-
+export default function page() {
   return (
-    <div className='flex flex-col items-center justify-center gap-4 h-screen'>
-      <div className='flex items-center justify-between px-4 w-full'>
-        <h1 className='font-bold text-3xl'>Feedback</h1> 
-        <div className='flex  gap-4'><div className='cursor-pointer'><FaDiscord size={18}/></div> <div className='cursor-pointer'><FaInstagram size={18}/></div></div>
-        </div>
-      <Image src="/authimg.jpeg" alt='authimg' height={400} width={400} className='rounded-xl'/>
-      <Button className='w-full flex items-center justify-center gap-2' onClick={handleGithubSignin}><FaGithub size={20} />Sign up with GitHub</Button>
-      <Button className='w-full flex items-center justify-center gap-2' onClick={handleGoogleSignin}><FaGoogle size={18} />Sign up with Google</Button>
-<p className='text-sm font-light'>Already have an account? <Link href={'/sign-in'} className='underline'>Login</Link></p>
+    <>
+      <div className="container relative h-screen flex items-center justify-center">
+        <Link
+          href="/sign-in"
+          className={cn(
+            buttonVariants({ variant: "ghost" }),
+            "absolute right-4 top-4 md:right-8 md:top-8"
+          )}
+        >
+          Login
+        </Link>
+      
+          <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
+            <div className="flex flex-col space-y-2 text-center">
+              <h1 className="text-2xl font-semibold tracking-tight">
+                Create an account
+              </h1>
+              <p className="text-sm text-muted-foreground">
+              Sign up with Google or GitHub to get started.
+              </p>
+            </div>
+            <UserAuthForm />
+            <p className="px-8 text-center text-sm text-muted-foreground">
+              By signing up, you agree to our{" "}
+              <Link
+                href="/terms"
+                className="underline underline-offset-4 hover:text-primary"
+              >
+                Terms of Service
+              </Link>{" "}
+              and{" "}
+              <Link
+                href="/privacy"
+                className="underline underline-offset-4 hover:text-primary"
+              >
+                Privacy Policy
+              </Link>
+              .
+            </p>
           </div>
+        </div>
+  
+    </>
   )
 }
-
-export default page
-
-

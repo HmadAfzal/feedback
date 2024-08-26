@@ -1,8 +1,8 @@
 import { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Examples",
-  description: "Check out some examples app built using the components.",
+  title: "Feedback",
+  description: "Get started with feedback",
 }
 
 interface ExamplesLayoutProps {
@@ -11,8 +11,8 @@ interface ExamplesLayoutProps {
 
 export default function ExamplesLayout({ children }: ExamplesLayoutProps) {
   return (
-    <div className="container w-[20%]">
-          {children}
-        </div>
+    <div>
+      {children}
+    </div>
   )
 }
