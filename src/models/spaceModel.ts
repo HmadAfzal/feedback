@@ -10,9 +10,8 @@ export interface Space extends Document {
   image: string;
   title: string;
   description: string;
-  isDarkTheme: boolean;
+  theme: 'light' | 'dark';
   buttonText: string;
-  ConsentStatement: string;
   thankyouPageTitle: string;
   thankyouPageText: string;
   public_id: string;
@@ -40,19 +39,15 @@ const SpaceSchema: Schema<Space> = new mongoose.Schema({
     type: String,
     required: [true, 'description is required'],
   },
-  isDarkTheme: {
-    type: Boolean,
-    default: true,
-  },
+  theme: {
+    type: String,
+    enum: ['light', 'dark'],
+    default: 'light',
+},
   buttonText: {
     type: String,
     required: true,
     default: 'Send in feedback',
-  },
-  ConsentStatement:{
-    type: String,
-    required: true,
-    default: 'I give permission to use this feedback',
   },
   thankyouPageTitle: {
     type: String,

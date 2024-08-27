@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ArrowLeft, Eye, Loader2, PenSquareIcon, Rocket } from 'lucide-react';
-import { Button } from '../ui/button';
-import { Checkbox } from '../ui/checkbox';
+import { Button } from '../../../../components/ui/button';
+import { Checkbox } from '../../../../components/ui/checkbox';
 import { SpaceSchema } from '@/schemas/Space';
 import axios from 'axios';
-import { toast } from '../ui/use-toast';
+import { toast } from '../../../../components/ui/use-toast';
 import { Session } from '@/schemas/Session';
 import { z } from 'zod';
 import { useAppDispatch } from '@/redux/hooks';
@@ -111,7 +111,7 @@ const FormPreview = ({ formData, selectedFile, setCreateSpace, user, imageFile, 
             <div className="flex items-center space-x-2 py-8">
                 <Checkbox id="terms" />
                 <label htmlFor="terms" className="text-sm font-medium leading-none">
-                    {formData?.ConsentStatement}
+                    weucjwbc
                 </label>
             </div>
             <Button className='w-full flex items-center gap-3'>

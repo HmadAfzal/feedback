@@ -4,18 +4,11 @@ import UserModel from "@/models/userModel";
 
 export async function POST(request: Request) {
     await dbConnect();
+
     try {
-        const { name, image, public_id, title, description, isDarkTheme, buttonText, ConsentStatement, thankyouPageTitle, thankyouPageText, userId,
-        } = await request.json();
-        if (
-            !name ||
-            !title ||
-            !description ||
-            !thankyouPageTitle ||
-            !thankyouPageText ||
-            !buttonText ||
-            !ConsentStatement
-        ) {
+        const {name,image,public_id,title,description,theme,buttonText,thankyouPageTitle,thankyouPageText,userId} = await request.json();
+
+        if (!name ||!title ||!description ||!thankyouPageTitle ||!thankyouPageText ||!buttonText) {
             return Response.json(
                 {
                     success: false,
@@ -25,11 +18,13 @@ export async function POST(request: Request) {
             );
         }
 
+        console.log(name, image, public_id, title, description, theme, buttonText, thankyouPageTitle, thankyouPageText, userId);
+
         if (!userId) {
             return Response.json(
                 {
                     success: false,
-                    message: 'user id is required',
+                    message: 'User ID is required',
                 },
                 { status: 400 }
             );
@@ -63,9 +58,8 @@ export async function POST(request: Request) {
             public_id,
             title,
             description,
-            isDarkTheme,
+            theme: theme || 'light',
             buttonText,
-            ConsentStatement,
             thankyouPageText,
             thankyouPageTitle,
             owner: user._id,

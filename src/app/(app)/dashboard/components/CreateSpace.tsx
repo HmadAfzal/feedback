@@ -1,18 +1,18 @@
 import React, { useState } from 'react'
-import FormPreview from './FormPreview'
 import { Session } from '@/schemas/Session'
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { Button } from '../ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Textarea } from '@/components/ui/textarea';
 import { Eye, Moon } from 'lucide-react';
 import { Switch } from '@/components/ui/switch';
-import CustomUploadButton from '../CustomUploadButton';
 import { SpaceSchema } from '@/schemas/Space';
+import FormPreview from './FormPreview';
+import CustomUploadButton from '@/components/CustomUploadButton';
+import { Button } from '@/components/ui/button';
 
 
 const CreateSpace = ({ user, setCreateSpace }: { user: Session, setCreateSpace: (value: boolean) => void }) => {
@@ -32,14 +32,13 @@ const CreateSpace = ({ user, setCreateSpace }: { user: Session, setCreateSpace: 
             description: "",
             isDarkTheme: true,
             buttonText: 'Send in feedback',
-            ConsentStatement: 'I give permission to use this feedback',
             thankyouPageTitle: "Thank you!",
             thankyouPageText: "Your feedback means a lot to us",
         },
     });
 
     const onSubmit = async (data: z.infer<typeof SpaceSchema>) => {
-
+console.log(data)
         setFormData(data);
         setPreview(true);
     };
@@ -140,15 +139,6 @@ const CreateSpace = ({ user, setCreateSpace }: { user: Session, setCreateSpace: 
                                         )} />
                                     </div>
                                 </div>
-                                <FormField control={form.control} name="ConsentStatement" render={({ field }) => (
-                                    <FormItem className='pb-4'>
-                                        <FormLabel >Consent statement</FormLabel>
-                                        <FormControl>
-                                            <Input placeholder="Statement" {...field} className='bg-transparent' />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )} />
                              <p className='text-sm text-[#EA580C] cursor-pointer hover:underline pb-4' onClick={() => setAdditional(!additional)}>
                                     Customize Thank you Page
                                 </p>  

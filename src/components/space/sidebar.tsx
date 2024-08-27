@@ -3,8 +3,8 @@ import { Globe2, Heart, Inbox, NotebookText } from 'lucide-react';
 
 interface SidebarProps {
   setSideBarOption: (option: string) => void;
-  sidebarOpen: boolean; // Prop to control sidebar visibility
-  setSidebarOpen: (open: boolean) => void; // Prop to close the sidebar
+  sidebarOpen: boolean; 
+  setSidebarOpen: (open: boolean) => void; 
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ setSideBarOption, sidebarOpen, setSidebarOpen }) => {

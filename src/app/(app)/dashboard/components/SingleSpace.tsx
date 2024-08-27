@@ -1,8 +1,9 @@
 import React from 'react';
 import {Link2 } from 'lucide-react';
 import { Space } from '@/schemas/Space';
-import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
-import SpaceSettings from '../SpaceSettings';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import SpaceSettings from '@/components/SpaceSettings';
+
 
 
 const SingleSpace = ({space}:{space: Space }) => {
@@ -20,9 +21,9 @@ const SingleSpace = ({space}:{space: Space }) => {
                 <div>
                     <h3 className='font-bold md:text-xl text-lg md:pb-2 pb-1'>{space?.name}</h3>
                     <div className='flex items-center gap-2 text-muted-foreground hover:underline [w-90%]'>
-                        <Link2 className='md:size-6 size-5' />
-                        <span className='block sm:hidden text-sm'>{truncatedUrl}</span>
-                        <span className='hidden sm:block text-md '>{spaceUrl}</span>
+                        <Link2 className='md:size-5 size-4' />
+                        <span className='block sm:hidden text-md text-muted-foreground tracking-wide'>{truncatedUrl}</span>
+                        <span className='hidden sm:block text-sm  text-muted-foreground tracking-wide'>{spaceUrl}</span>
                     </div>
                 </div>
             </div>

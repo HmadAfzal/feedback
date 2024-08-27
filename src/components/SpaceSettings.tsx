@@ -93,8 +93,8 @@ const router=useRouter()
     <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                     <Button variant="link" size="icon">
-                        <div className='cursor-pointer text-muted-foreground'>
-                            <Settings className='md:size-6 size-5' />
+                        <div className='cursor-pointer text-muted-foreground hover:text-primary'>
+                            <Settings className='md:size-5 size-4' />
                         </div>
                     </Button>
                 </DropdownMenuTrigger>

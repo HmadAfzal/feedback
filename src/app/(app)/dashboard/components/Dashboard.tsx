@@ -3,16 +3,14 @@ import React, { useState } from 'react'
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { getFirstName } from '@/utils/getfirstname';
 import { Separator } from '@/components/ui/separator';
-import { Link2, Rocket, Settings } from 'lucide-react';
+import {  Rocket } from 'lucide-react';
 import { Session } from '@/schemas/Session';
-import { Button } from '../ui/button';
 import Link from 'next/link';
 import { useAppSelector } from '@/redux/hooks';
 import { getSpaces } from '@/redux/spaceslice';
 import {
   Pagination,
   PaginationContent,
-  PaginationEllipsis,
   PaginationItem,
   PaginationLink,
   PaginationNext,
@@ -20,6 +18,7 @@ import {
 } from "@/components/ui/pagination";
 import { Space } from '@/schemas/Space';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+import { Button } from '@/components/ui/button';
 import SingleSpace from './SingleSpace';
 
 const Dashboard = ({ user, setCreateSpace }: { user: Session, setCreateSpace: (value: boolean) => void }) => {
@@ -39,21 +38,21 @@ const Dashboard = ({ user, setCreateSpace }: { user: Session, setCreateSpace: (v
   return (
     <div>
       <div className='flex items-center justify-start gap-5 my-16'>
-        <Avatar className='md:h-32 md:w-32 h-20 w-20'>
+        <Avatar className='md:h-24 md:w-24 h-20 w-20'>
           <AvatarImage src={user?.profilepic} />
-          <AvatarFallback>pf</AvatarFallback>
+          <AvatarFallback>{user?.name[0]}</AvatarFallback>
         </Avatar>
         <div className='flex flex-col gap-2'>
-          <h1 className='font-bold text-3xl md:text-5xl'>{getFirstName(user?.username || '')}&apos;s Dashboard</h1>
-          <p className='font-normal md:text-lg text-sm'>{user?.email}</p>
+          <h1 className='font-bold text-3xl md:text-4xl'>Welcome, {getFirstName(user?.username || '')}</h1>
+          <p className=' md:text-md text-sm text-muted-foreground tracking-wide'>Let&apos;s get productive—your dashboard is ready.</p>
         </div>
       </div>  
       <Separator className="my-12" />
       <div className='w-full flex items-center justify-between mb-6'>
         <h2 className='font-bold text-2xl md:text-3xl'>Spaces</h2>
-        <Button className='flex items-center justify-center md:gap-3 gap-2' onClick={() => setCreateSpace(true)}>
-  <Rocket  className='md:size-6 size-5' /> Create Space
-</Button>
+        <Link href={'/create-space'} className='flex items-center justify-center'>
+  <Rocket  className='mr-2 size-4' /> Create Space
+</Link>
       </div>
       {currentItems && currentItems.length > 0 ? (
         currentItems.map((space: Space) => (
@@ -75,15 +74,7 @@ const Dashboard = ({ user, setCreateSpace }: { user: Session, setCreateSpace: (v
         <Pagination className='pt-4 pb-12'>
           <PaginationContent>
             <PaginationItem>
-              {currentPage > 1 && (
-                <PaginationPrevious
-                className='cursor-pointer'
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handlePageChange(currentPage - 1);
-                  }}
-                />
-              )}
+
             </PaginationItem>
             {[...Array(totalPages)].map((_, index) => (
               <PaginationItem key={index}>
@@ -100,15 +91,6 @@ const Dashboard = ({ user, setCreateSpace }: { user: Session, setCreateSpace: (v
               </PaginationItem>
             ))}
             <PaginationItem>
-              {currentPage < totalPages && (
-                <PaginationNext
-                  className='cursor-pointer'
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handlePageChange(currentPage + 1);
-                  }}
-                />
-              )}
             </PaginationItem>
           </PaginationContent>
         </Pagination>

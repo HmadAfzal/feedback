@@ -2,11 +2,12 @@
 import { useSession } from 'next-auth/react';
 import React, { useEffect, useState } from 'react'
 import { Loader2 } from 'lucide-react';
-import CreateSpace from '@/components/dashboard/CreateSpace';
-import Dashboard from '@/components/dashboard/Dashboard';
+
 import axios from 'axios';
 import { useAppDispatch } from '@/redux/hooks';
 import { selectSpaces } from '@/redux/spaceslice';
+import CreateSpace from './components/CreateSpace';
+import Dashboard from './components/Dashboard';
 
 const page = () => {  
   const [createSpace, setCreateSpace] = useState(false);
