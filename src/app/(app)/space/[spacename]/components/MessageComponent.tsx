@@ -10,7 +10,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Button } from './ui/button';
 import { useAppDispatch } from '@/redux/hooks';
 import { deleteMessage } from '@/redux/messageslice';
 import { formatTime } from '@/utils/formattime';
@@ -22,6 +21,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Message } from '@/schemas/Message';
+import { Button } from '@/components/ui/button';
 
 const MessageComponent = ({ message,setLikeMessage, likeMessage }: { message: Message, setLikeMessage:(option:boolean)=>void, likeMessage:boolean}) => {
   const [loading, setLoading] = useState(false);

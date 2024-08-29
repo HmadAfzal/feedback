@@ -1,6 +1,6 @@
-import EmbedCarousel from "@/components/EmbedCarousel";
 import { dbConnect } from "@/lib/dbConnect";
 import MessageModel from "@/models/MessageModel";
+import EmbedCarousel from "./components/EmbedCarousel";
 
 interface EmbedPageProps {
   params: {

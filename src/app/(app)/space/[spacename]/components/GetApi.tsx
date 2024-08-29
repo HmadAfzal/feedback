@@ -1,7 +1,7 @@
-import CodeBlock from '@/components/CodeBlock';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import React, { useState } from 'react'
+import CodeBlock from './CodeBlock';
 
 const GetApi = ({spacename}:{spacename:string}) => {
     const [messageType, setMessageType] = useState('all');

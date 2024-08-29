@@ -5,7 +5,7 @@ import { Loader2 } from 'lucide-react';
 import { toast } from '@/components/ui/use-toast';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Button } from '@/components/ui/button';
-import CodeBlock from '@/components/CodeBlock';
+import CodeBlock from './CodeBlock';
 
 const EmbedToSite = ({ spaceId }: { spaceId: string }) => {
     const [embedCode, setEmbedCode] = useState<string | null>(null);

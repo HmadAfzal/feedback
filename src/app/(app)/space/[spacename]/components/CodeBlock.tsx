@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Copy } from 'lucide-react'; // Importing an icon for the copy button
-import { Button } from './ui/button';
+import { Button } from '@/components/ui/button';
 
 const CodeBlock = ({ code }: { code: string }) => {
     const [copied, setCopied] = useState(false);

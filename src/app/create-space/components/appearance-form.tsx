@@ -24,7 +24,7 @@ import { useRouter } from 'next/navigation'
 
 const appearanceFormSchema = z.object({
   theme: z.enum(["light", "dark"], {
-    required_error: "Please select a theme.",
+    message: "Please select a theme.",
   })
 })
 

@@ -1,8 +1,8 @@
-import Main from '@/components/SendMessage/Main'
 import { dbConnect } from '@/lib/dbConnect'
 import SpaceModel from '@/models/spaceModel'
 import { Space } from '@/schemas/Space'
 import React from 'react'
+import Main from './components/Main'
 
 const SpacePage = async ({ params }: { params: { spacename: string } }) => {
   await dbConnect()

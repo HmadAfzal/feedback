@@ -1,4 +1,4 @@
-import Nav from "@/components/nav/Nav";
+import Nav from "@/components/Nav";
 
 interface RootLayoutProps {
     children: React.ReactNode;

@@ -1,20 +1,20 @@
 'use client';
 import React, { useState } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Checkbox } from '../ui/checkbox';
+import { Checkbox } from '../../../../components/ui/checkbox';
 import { Loader2, PenSquareIcon } from 'lucide-react';
-import { Button } from '../ui/button';
+import { Button } from '../../../../components/ui/button';
 import { Space } from '@/schemas/Space';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from "@/components/ui/input";
-import { Textarea } from '../ui/textarea';
+import { Textarea } from '../../../../components/ui/textarea';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { MessageSchema } from '@/schemas/Message';
-import CustomUploadButton from '../CustomUploadButton';
-import { toast } from '../ui/use-toast';
+import CustomUploadButton from '../../../../components/CustomUploadButton';
+import { toast } from '../../../../components/ui/use-toast';
 import axios from 'axios';
 import Image from 'next/image';
 import { useAppDispatch } from '@/redux/hooks';
@@ -46,7 +46,7 @@ const dispatch=useAppDispatch()
             if (selectedFile) {
                 const formData = new FormData();
                 formData.append('file', selectedFile);
-                formData.append('upload_preset', 'testimonial');  // create an upload preset and enter it here
+                formData.append('upload_preset', 'testimonial');
 
                 const response = await fetch(`https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`, {
                     method: 'POST',
@@ -89,7 +89,7 @@ const dispatch=useAppDispatch()
     };
 
     return (
-        <div className={`${spaceData?.isDarkTheme ? 'bg-[#121212] text-white' : 'bg-white text-black'} p-8  min-h-screen flex items-center justify-center`}>
+        <div className={`${spaceData?.theme == 'dark' ?  'bg-[#121212] text-white' : 'bg-white text-black'} p-8  min-h-screen flex items-center justify-center`}>
   <div className="w-full max-w-[90%] md:max-w-[70%]">
     <div className="flex flex-col items-center justify-center gap-6 pb-2">
       <Avatar className="h-24 w-24 md:h-36 md:w-36">
@@ -123,7 +123,7 @@ const dispatch=useAppDispatch()
                             <PenSquareIcon size={20} /> {spaceData?.buttonText}
                         </Button>
                     </DialogTrigger>
-                    <DialogContent className={`sm:max-w-[425px] border-none ${spaceData?.isDarkTheme ? 'bg-neutral-900 text-white' : 'bg-white text-black'}`}>
+                    <DialogContent className={`sm:max-w-[425px] border-none ${spaceData?.theme == 'dark' ? 'bg-neutral-900 text-white' : 'bg-white text-black'}`}>
                         <DialogHeader>
                             <div className='flex flex-col items-center justify-center gap-2 '>
                                 <Avatar className='h-20 w-20'>
@@ -210,7 +210,7 @@ const dispatch=useAppDispatch()
                 </Dialog>
 
                 <Dialog open={showThankYouDialog} onOpenChange={(open) => setShowThankYouDialog(open)}>
-                    <DialogContent className={`sm:max-w-[425px] border-none ${spaceData?.isDarkTheme ? 'bg-neutral-900 text-white' : 'bg-white text-black'}`}>
+                    <DialogContent className={`sm:max-w-[425px] border-none ${spaceData?.theme == 'dark' ? 'bg-neutral-900 text-white' : 'bg-white text-black'}`}>
                         <DialogHeader>
                             <div className='flex w-full items-center justify-center'>
                                 <Image src='https://media.giphy.com/media/8qD1FHjc4wllVBL3ln/giphy.gif?cid=ecf05e47gvya2nlu06oll65e05mxeg23paqfdhwynqmzbbyf&ep=v1_gifs_search&rid=giphy.gif&ct=g' alt='img' height={300} width={300} className='rounded-lg'/>

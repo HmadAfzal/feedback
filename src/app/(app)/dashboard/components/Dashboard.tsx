@@ -55,7 +55,7 @@ const Dashboard = () => {
   }
 
   return (
-    <div>
+    <>
       <div className='flex items-center justify-start gap-5 my-16'>
         <Avatar className='md:h-24 md:w-24 h-20 w-20'>
           <AvatarImage src={user?.profilepic} />
@@ -117,7 +117,7 @@ const Dashboard = () => {
           </PaginationContent>
         </Pagination>
       )}
-    </div>
+    </>
   );
 };
 
