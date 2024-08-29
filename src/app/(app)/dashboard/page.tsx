@@ -10,3 +10,9 @@ const page = () => {
 }
 
 export default page;
+
+
+//todo:  schema validations 
+// create and edit space zod resolver set
+// improve /u/:spacename styling
+// embed page responsive

@@ -15,7 +15,7 @@ import axios from 'axios';
 import { useAppDispatch } from '@/redux/hooks';
 import { selectSpaces } from '@/redux/spaceslice';
 import { toast } from '../../../../../components/ui/use-toast';
-import { Loader2 } from 'lucide-react';
+import { Loader2, Pen } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import CustomUploadButton from '@/components/CustomUploadButton';
@@ -43,7 +43,6 @@ const SpaceEdit = ({ space }: { space: Space }) => {
     });
 
     const onSubmit = async (data: z.infer<typeof EditSpaceSchema>) => {
-
         setLoading(true);
         try {
             if (selectedFile && space.public_id) {
@@ -106,7 +105,7 @@ const SpaceEdit = ({ space }: { space: Space }) => {
         return (
             <Dialog open={open} onOpenChange={setOpen}>
                 <DialogTrigger asChild>
-                    <Button variant="outline">Edit Space</Button>
+                    <Button>Edit Space</Button>
                 </DialogTrigger>
                 <DialogContent className="sm:max-w-[425px] border-none">
                     <DialogHeader>
@@ -132,7 +131,11 @@ const SpaceEdit = ({ space }: { space: Space }) => {
     return (
         <Drawer open={open} onOpenChange={setOpen}>
             <DrawerTrigger asChild>
-                <Button variant="outline">Edit Profile</Button>
+            <Button variant="link" size="icon">
+            <div className='cursor-pointer text-muted-foreground hover:text-primary'>
+                <Pen className='size-4 md:size-5'/>
+                </div>
+                </Button>
             </DrawerTrigger>
             <DrawerContent className="border-none">
                 <DrawerHeader className="text-left">

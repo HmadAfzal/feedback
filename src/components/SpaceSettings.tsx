@@ -11,6 +11,7 @@ import { Label } from './ui/label';
 import { Input } from './ui/input';
 import { toast } from './ui/use-toast';
 import { Space } from '@/schemas/Space';
+import SpaceEdit from '@/app/(app)/space/[spacename]/components/SpaceEdit';
 const SpaceSettings = ({spaceUrl, space}:{spaceUrl:string, space:Space}) => {
 
     const dispatch = useAppDispatch();
