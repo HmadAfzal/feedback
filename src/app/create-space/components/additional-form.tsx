@@ -31,15 +31,18 @@ const additionalFormSchema = z.object({
   .min(1, { message: "Thank you page text is required" }),
 })
 
-type additionalFormValues = z.infer<typeof additionalFormSchema>
-
-const defaultValues: Partial<additionalFormValues> = {
-thankyouPageText:"Thanks alot for the feedback it means a ton to us",
-thankyouPageTitle:"Thank you!"
-}
 
 const AdditionalForm = ({setActiveItem , setFormData, formData}: {setActiveItem: (name: string) => void, setFormData:any, formData:any}) => {
-    const form = useForm<any>({
+
+  type additionalFormValues = z.infer<typeof additionalFormSchema>
+
+const defaultValues: Partial<additionalFormValues> = {
+thankyouPageText:formData.thankyouPageText ||"Thanks alot for the feedback it means a ton to us",
+thankyouPageTitle:formData.thankyouPageTitle ||"Thank you!"
+}
+
+
+    const form = useForm<additionalFormValues>({
         resolver: zodResolver(additionalFormSchema),
         defaultValues,
       })

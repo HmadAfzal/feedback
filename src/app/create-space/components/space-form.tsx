@@ -56,6 +56,15 @@ const SpaceForm = ({ setActiveItem, user, setFormData, formData , setImage}: { s
   const [imageFile, setImageFile] = useState();
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
+    const defaultValues: Partial<spaceFormValues> = {
+      image:formData.image || "",
+      name:formData.name|| "",
+      title: formData.title|| "",
+      description:formData.description||  "",
+      buttonText: formData.buttonText || 'Send in feedback',
+    }
+
+    
   const form = useForm<z.infer<typeof spaceFormSchema>>({
     resolver: zodResolver(spaceFormSchema),
     defaultValues,

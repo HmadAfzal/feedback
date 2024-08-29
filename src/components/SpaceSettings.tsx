@@ -1,24 +1,10 @@
 import React, { useState } from 'react';
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-;
-import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogFooter,
-    DialogHeader,
-    DialogTitle,
-} from "@/components/ui/dialog";
-
+import {DropdownMenu,DropdownMenuContent, DropdownMenuItem,DropdownMenuTrigger} from "@/components/ui/dropdown-menu";
+import {Dialog,DialogContent,DialogDescription,DialogFooter,DialogHeader,DialogTitle} from "@/components/ui/dialog";
 import axios from 'axios';
 import { useAppDispatch } from '@/redux/hooks';
 import { deleteSpace } from '@/redux/spaceslice';
-import { Copy, Link2, Loader2, Settings, Trash2 } from 'lucide-react';
+import { Copy, Loader2, Settings, Trash2 } from 'lucide-react';
 import { useRouter } from 'next/navigation'
 import { Button } from './ui/button';
 import { Label } from './ui/label';
@@ -31,7 +17,7 @@ const SpaceSettings = ({spaceUrl, space}:{spaceUrl:string, space:Space}) => {
     const [showDeleteDialog, setShowDeleteDialog] = useState(false);
     const [showCopyLinkDialog, setShowCopyLinkDialog]=useState(false)
     const [loading, setLoading] = useState(false)
-const router=useRouter()
+    const router=useRouter()
 
     const handleCopyLink = (event: React.MouseEvent) => {
         event.stopPropagation();
@@ -54,7 +40,7 @@ const router=useRouter()
         setShowCopyLinkDialog(true);
     };
 
-    const handleDelete = async (event: React.MouseEvent,spaceId: string, publicId: string, owner: string) => {
+    const handleDelete = async (event: React.MouseEvent,spaceId: string, publicId: string, ownerId: string) => {
         event.stopPropagation();
 
         try {
@@ -66,8 +52,8 @@ const router=useRouter()
             }
 
             const response = await axios.delete('/api/delete-space', {
-                data: { spaceId, owner },
-            });
+                data: { spaceId, ownerId },
+            }); 
 
             dispatch(deleteSpace(spaceId));
 
@@ -100,7 +86,7 @@ const router=useRouter()
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="border-none p-2 mx-0">
                     <DropdownMenuItem className='cursor-pointer' onClick={handleShowCopyLinkDialog}>
-                        Copy link
+                        Share
                     </DropdownMenuItem>
                     <DropdownMenuItem className='cursor-pointer text-bg-red-500' onClick={handleShowDialogue}>
                         Delete

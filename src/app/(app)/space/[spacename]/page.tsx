@@ -3,31 +3,29 @@ import React, { useState, useEffect } from 'react';
 import { Separator } from '@/components/ui/separator';
 import { useAppSelector } from '@/redux/hooks';
 import { getSpaces } from '@/redux/spaceslice';
-import { Loader2, Menu, MenuSquare } from 'lucide-react';
+import { Loader2, Menu } from 'lucide-react';
 import { useParams } from 'next/navigation';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
-import SpaceHeader from '@/components/SpaceHeader';
-import EditSpace from '@/components/space/EditSpace';
 import MessageComponent from '@/components/MessageComponent';
-import Sidebar from '@/components/space/sidebar';
-import EmbedToSite from '@/components/space/EmbedToSite';
-import GetApi from '@/components/space/GetApi';
+import Sidebar from '@/app/(app)/space/[spacename]/components/sidebar';
 import axios from 'axios';
 import { Space } from '@/schemas/Space';
 import { Message } from '@/schemas/Message';
+import SpaceHeader from './components/SpaceHeader';
+import EmbedToSite from './components/EmbedToSite';
+import GetApi from './components/GetApi';
 
 const Page = () => {
   const spaces = useAppSelector(getSpaces);
   const params = useParams();
   const [space, setSpace] = useState<Space | undefined>(undefined);
-  const [editSpace, setEditSpace] = useState(false);
   const [stateLoading, setStateLoading] = useState(true);
   const [messageLoading, setMessageLoading] = useState(false);
   const [sideBarOption, setSideBarOption] = useState('All');
   const [messages, setMessages] = useState<Message[]>([]);
   const [likeMessage, setLikeMessage] = useState<boolean>(false);
-  const [sidebarOpen, setSidebarOpen] = useState(false); // New state for sidebar visibility
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
     if (spaces && spaces.length > 0) {
@@ -46,7 +44,6 @@ const Page = () => {
           if (sideBarOption === 'Liked') {
             endpoint = '/api/get-likedMessages/';
           }
-
           const response = await axios.get(`${endpoint}${space.name}`);
           setMessages(response?.data.messages);
         } catch (error) {
@@ -70,14 +67,11 @@ const Page = () => {
 
   return (
     <>
-      {editSpace ? (
-        <EditSpace setEditSpace={setEditSpace} space={space} />
-      ) : (
         <div >
           <Separator className='my-4' />
           {space && (
             <>
-              <SpaceHeader space={space} setEditSpace={setEditSpace} />
+              <SpaceHeader space={space} />
             </>
           )}
           <Separator className='mt-4' />
@@ -137,7 +131,6 @@ const Page = () => {
             </div>
           </div>
         </div>
-      )}
     </>
   );
 };

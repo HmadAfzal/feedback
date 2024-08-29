@@ -27,7 +27,7 @@ export function SidebarNav({activeItem,}: {activeItem: string}) {
           ${
             activeItem === item.name
               ? 'bg-primary text-primary-foreground shadow-inner'
-              : 'cursor-not-allowed'
+              : 'cursor-context-menu'
           }`}
         >
           {item.title}

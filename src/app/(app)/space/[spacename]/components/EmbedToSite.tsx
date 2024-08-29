@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
-import { ScrollArea } from '../ui/scroll-area'
 import { Badge } from "@/components/ui/badge"
 import axios from 'axios';
-import CodeBlock from '../CodeBlock';
-import { Button } from '../ui/button';
-import { toast } from '../ui/use-toast';
 import { Loader2 } from 'lucide-react';
+import { toast } from '@/components/ui/use-toast';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { Button } from '@/components/ui/button';
+import CodeBlock from '@/components/CodeBlock';
 
 const EmbedToSite = ({ spaceId }: { spaceId: string }) => {
     const [embedCode, setEmbedCode] = useState<string | null>(null);

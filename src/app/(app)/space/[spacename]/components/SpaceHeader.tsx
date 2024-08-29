@@ -1,12 +1,11 @@
 import React from 'react';
-import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
 import { Link2, Pen } from 'lucide-react';
 import { Space } from '@/schemas/Space';
-import SpaceSettings from './SpaceSettings';
-import { Button } from './ui/button';
-import SpaceEdit from './space/SpaceEdit';
+import SpaceEdit from './SpaceEdit';
+import SpaceSettings from '@/components/SpaceSettings';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
-const SpaceHeader = ({space, setEditSpace}: {space: Space, setEditSpace:(setEditSpace:boolean)=>void}) => {
+const SpaceHeader = ({space}: {space: Space}) => {
     const baseUrl = `${window.location.protocol}//${window.location.host}`;
     const spaceUrl = `${baseUrl}/u/${space?.name}`;
     const truncatedUrl = spaceUrl.length > 20 ? `${spaceUrl.slice(0, 20)}...` : spaceUrl;

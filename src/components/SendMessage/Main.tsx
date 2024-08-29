@@ -195,7 +195,7 @@ const dispatch=useAppDispatch()
                                             onCheckedChange={(checked) => setIsCheckboxChecked(checked === true)}
                                         />
                                         <label htmlFor="terms" className="text-sm font-medium leading-none">
-                                            {spaceData?.ConsentStatement}
+                                            I givr permission to use this feedback
                                         </label>
                                     </div>
                                     <div className="flex items-center justify-between">

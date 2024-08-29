@@ -75,6 +75,7 @@ const onSubmit=async(data: AppearanceFormValues)=> {
           const response = await axios.post('/api/create-space', {
             userId: user?._id,
             ...formData,
+            theme:data.theme,
             image: imageUrl,
             public_id: publicId,
           });

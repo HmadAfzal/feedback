@@ -20,7 +20,7 @@ const Nav = () => {
             <h1 className='font-bold text-3xl'><Link href={'/'}>Feedback</Link></h1>
             <div className='flex items-center justify-center gap-8'>
                 <ModeToggle />
-                <Button onClick={handleSignout}>Sign out</Button>
+                <Button variant={'outline'} onClick={handleSignout}>Sign out</Button>
             </div>
         </nav>
     )

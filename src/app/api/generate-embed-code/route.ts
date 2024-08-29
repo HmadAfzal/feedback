@@ -12,12 +12,10 @@ export async function GET(request: Request) {
     const cardBgColor = url.searchParams.get("cardBgColor");
     const textColor = url.searchParams.get("textColor");
 
+  
     if (!spaceId) {
       return Response.json(
-        {
-          success: false,
-          message: "Missing required query parameters",
-        },
+        { success: false, message: "Bad Request - Missing required query parameters" },
         { status: 400 }
       );
     }
@@ -25,33 +23,27 @@ export async function GET(request: Request) {
     const space = await SpaceModel.findById(spaceId);
     if (!space) {
       return Response.json(
-        {
-          success: false,
-          message: "Space not found",
-        },
+        { success: false, message: "Not Found - Space not found" },
         { status: 404 }
       );
     }
 
-    const iframeSrc = `http://localhost:3000/embed/${spaceId}?type=${type}&bgColor=${bgColor}&cardBgColor=${cardBgColor}&textColor=${textColor}`;
-    const embedCode = `<iframe id="embed-${spaceId}" src="${iframeSrc}" frameborder="0" scrolling="no" width="100%" style="background: transparent;"></iframe>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/4.3.2/iframeResizer.min.js"></script>
-<script type="text/javascript">iFrameResize({ log: false, checkOrigin: false }, '#embed-${spaceId}')</script>`;
+    const baseUrl = `${url.protocol}//${url.hostname}${url.port ? `:${url.port}` : ''}`;
+    const iframeSrc = `${baseUrl}/embed/${spaceId}?type=${type}&bgColor=${bgColor}&cardBgColor=${cardBgColor}&textColor=${textColor}`;
+    const embedCode = `
+      <iframe id="embed-${spaceId}" src="${iframeSrc}" frameborder="0" scrolling="no" width="100%" style="background: transparent;"></iframe>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/4.3.2/iframeResizer.min.js"></script>
+      <script type="text/javascript">iFrameResize({ log: false, checkOrigin: false }, '#embed-${spaceId}');</script>
+    `;
 
     return Response.json(
-      { 
-        success: true, 
-        embedCode 
-      },
+      { success: true, embedCode },
       { status: 200 }
     );
   } catch (error) {
-    console.error("Error in generating embed code: ", error);
+    console.error("Error generating embed code:", error);
     return Response.json(
-      {
-        success: false,
-        message: "Error in generating embed code",
-      },
+      { success: false, message: "Internal Server Error - Error generating embed code" },
       { status: 500 }
     );
   }

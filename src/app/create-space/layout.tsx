@@ -16,7 +16,7 @@ interface SettingsLayoutProps {
 export default function SettingsLayout({ children }: SettingsLayoutProps) {
   return (
     <>
-      <div>
+      <div className="md:px-20">
         {children}
       </div>
     </>

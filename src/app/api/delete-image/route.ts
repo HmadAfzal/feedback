@@ -1,4 +1,6 @@
 import { v2 as cloudinary } from 'cloudinary';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '../auth/[...nextauth]/options';
 
 cloudinary.config({
   cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
@@ -7,31 +9,42 @@ cloudinary.config({
 });
 
 export async function DELETE(request: Request) {
-    try {
-        const { publicId } = await request.json();
-console.log(publicId)
-        if (!publicId) {
-            return Response.json(
-                { success: false, message: 'Public ID is required' },
-                { status: 400 }
-            );
-        }
+  try {
+    const { publicId } = await request.json();
 
-        const result = await cloudinary.uploader.destroy(publicId);
-
-        if (result.result !== 'ok') {
-            throw new Error('Failed to delete image');
-        }
-
-        return Response.json(
-            { success: true, message: 'Image deleted successfully' },
-            { status: 200 }
-        );
-    } catch (error) {
-        console.error('Error deleting image:', error);
-        return Response.json(
-            { success: false, message: 'Error deleting image' },
-            { status: 500 }
-        );
+    const session = await getServerSession(authOptions);
+    if (!session) {
+      return Response.json(
+        { success: false, message: "Unauthorized - Please log in" },
+        { status: 401 }
+      );
     }
+
+    if (!publicId) {
+      return Response.json(
+        { success: false, message: "Bad Request - Public ID is required" },
+        { status: 400 }
+      );
+    }
+
+    const response = await cloudinary.uploader.destroy(publicId);
+
+    if (response.result !== 'ok') {
+      return Response.json(
+        { success: false, message: "Internal Server Error - Failed to delete image" },
+        { status: 500 } 
+      );
+    }
+
+    return Response.json(
+      { success: true, message: "Image deleted successfully" },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error("Error deleting image:", error);
+    return Response.json(
+      { success: false, message: "Internal Server Error - An error occurred" },
+      { status: 500 }
+    );
+  }
 }

@@ -1,32 +1,9 @@
 import React, { useState } from 'react';
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
-} from "@/components/ui/dialog";
-import {
-    Drawer,
-    DrawerClose,
-    DrawerContent,
-    DrawerDescription,
-    DrawerFooter,
-    DrawerHeader,
-    DrawerTitle,
-    DrawerTrigger,
-} from "@/components/ui/drawer";
-import {
-    Form,
-    FormControl,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
-} from "@/components/ui/form";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger,} from "@/components/ui/dialog";
+import { Drawer,DrawerClose,DrawerContent,DrawerDescription,DrawerFooter,DrawerHeader,DrawerTitle,DrawerTrigger} from "@/components/ui/drawer";
+import {Form,FormControl,FormField,FormItem,FormLabel,FormMessage} from "@/components/ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, UseFormReturn } from "react-hook-form";
 import { z } from "zod";
@@ -34,16 +11,15 @@ import { Input } from "@/components/ui/input";
 import { useMediaQuery } from '@/utils/useMediaQuery';
 import { Space, EditSpaceSchema } from '@/schemas/Space';
 import { useSession } from 'next-auth/react';
-import { Avatar, AvatarFallback } from '../ui/avatar';
-import { AvatarImage } from '@radix-ui/react-avatar';
-import CustomUploadButton from '../CustomUploadButton';
 import axios from 'axios';
 import { useAppDispatch } from '@/redux/hooks';
 import { selectSpaces } from '@/redux/spaceslice';
-import { toast } from '../ui/use-toast';
+import { toast } from '../../../../../components/ui/use-toast';
 import { Loader2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import { Textarea } from '../ui/textarea';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import CustomUploadButton from '@/components/CustomUploadButton';
+import { Textarea } from '@/components/ui/textarea';
 
 const SpaceEdit = ({ space }: { space: Space }) => {
     const [open, setOpen] = useState(false);
@@ -59,10 +35,10 @@ const SpaceEdit = ({ space }: { space: Space }) => {
     const form = useForm<z.infer<typeof EditSpaceSchema>>({
         resolver: zodResolver(EditSpaceSchema),
         defaultValues: {
-            name: space?.name,
-            image: space?.image,
-            title: space?.title,
-            description: space?.description,
+            name: space?.name || '',
+            image: space?.image || '',
+            title: space?.title || '',
+            description: space?.description || '',
         },
     });
 
@@ -72,7 +48,7 @@ const SpaceEdit = ({ space }: { space: Space }) => {
         try {
             if (selectedFile && space.public_id) {
                 await axios.delete('/api/delete-image', {
-                    data: { publicId: space.public_id },
+                    data: { publicId: space?.public_id },
                 });
             }
 
@@ -130,7 +106,7 @@ const SpaceEdit = ({ space }: { space: Space }) => {
         return (
             <Dialog open={open} onOpenChange={setOpen}>
                 <DialogTrigger asChild>
-                    <Button variant="outline">Edit Profile</Button>
+                    <Button variant="outline">Edit Space</Button>
                 </DialogTrigger>
                 <DialogContent className="sm:max-w-[425px] border-none">
                     <DialogHeader>
@@ -185,16 +161,7 @@ const SpaceEdit = ({ space }: { space: Space }) => {
     );
 };
 
-function ProfileForm({
-    className,
-    form,
-    onSubmit,
-    imageFile,
-    setSelectedFile,
-    setImageFile,
-    space,
-    loading
-}: {
+function ProfileForm({ className, form, onSubmit, imageFile, setSelectedFile, setImageFile, space, loading}: {
     className?: string;
     form: UseFormReturn<z.infer<typeof EditSpaceSchema>>;
     onSubmit: (data: z.infer<typeof EditSpaceSchema>) => void;
@@ -265,7 +232,7 @@ function ProfileForm({
                         <FormItem>
                             <FormLabel>Description</FormLabel>
                             <FormControl>
-                                <Textarea placeholder="Description" {...field} />
+                                <Textarea placeholder="Description" {...field}  className='resize-none'/>
                             </FormControl>
                             <FormMessage />
                         </FormItem>
