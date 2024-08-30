@@ -27,31 +27,23 @@ const spaceFormSchema = z.object({
     .string()
     .regex(/^[a-z0-9]+$/, { message: 'Only characters from a-z and numbers from 0-9 are allowed' })
     .min(2, { message: "Name must be at least 2 characters.", })
-    .max(30, { message: "Username must not be longer than 30 characters.", }),
+    .max(30, { message: "Name must not be longer than 30 characters.", }),
   title: z.
     string()
-    .min(4, { message: "Title must be at least 4 characters long" })
-    .max(60, { message: "Title must not be longer than 30 characters." }),
+    .min(1, { message: "Title is required" })
+    .max(30, { message: "Title must not be longer than 30 characters." }),
   description: z
     .string()
-    .min(6, { message: "description must be at least 6 characters long" })
+    .min(1, { message: "description is required" })
     .max(120, { message: "description must not be longer than 120 characters." }),
   buttonText: z
     .string()
     .min(1, { message: "Button text is required" })
-    .max(20, { message: "description must not be longer than 20 characters." }),
+    .max(30, { message: "Button text must not be longer than 30 characters." }),
 })
 
 type spaceFormValues = z.infer<typeof spaceFormSchema>
-
-const defaultValues: Partial<spaceFormValues> = {
-  image: "",
-  name: "",
-  title: "",
-  description: "",
-  buttonText: 'Send in feedback',
-}
-
+const baseUrl = `${window.location.protocol}//${window.location.host}`;
 const SpaceForm = ({ setActiveItem, user, setFormData, formData , setImage}: { setActiveItem: (name: string) => void, user:Session,  setFormData:any, formData:any, setImage:any }) => {
   const [imageFile, setImageFile] = useState();
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -121,7 +113,7 @@ const SpaceForm = ({ setActiveItem, user, setFormData, formData , setImage}: { s
                   <Input placeholder="feedback" {...field} />
                 </FormControl>
                 <FormDescription>
-                  This is your public space name. It can be your real name or a pseudonym, using only letters (a-z) and numbers (0-9). You can update it once every 30 days.
+                Public URL will be: {baseUrl}/your-space-name.
                 </FormDescription>
                 <FormMessage />
               </FormItem>
@@ -137,9 +129,8 @@ const SpaceForm = ({ setActiveItem, user, setFormData, formData , setImage}: { s
                   <Input placeholder="Would you like to give us a shoutout?" {...field} />
                 </FormControl>
                 <FormDescription>
-                  This is your public space name. It can be your real name or a
-                  pseudonym. You can only change this once every 30 days.
-                </FormDescription>
+       Max chars: 30
+      </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -152,15 +143,14 @@ const SpaceForm = ({ setActiveItem, user, setFormData, formData , setImage}: { s
                 <FormLabel>Bio</FormLabel>
                 <FormControl>
                   <Textarea
-                    placeholder="Tell us a little bit about yourself"
+                    placeholder="Write a warm message for your customers and give them simple directions on how you'd like the feedback to be."
                     className="resize-none"
                     {...field}
                   />
                 </FormControl>
                 <FormDescription>
-                  You can <span>@mention</span> other users and organizations to
-                  link to them.
-                </FormDescription>
+       Max chars: 120
+      </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -178,7 +168,7 @@ const SpaceForm = ({ setActiveItem, user, setFormData, formData , setImage}: { s
               </FormItem>
             )}
           />
-          <Button type='submit'>Update additional</Button>
+          <Button type='submit'>Next </Button>
         </form>
       </Form>
     </div>

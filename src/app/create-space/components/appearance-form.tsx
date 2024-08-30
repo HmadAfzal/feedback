@@ -105,7 +105,7 @@ const onSubmit=async(data: AppearanceFormValues)=> {
       <div>
         <h3 className="text-lg font-medium">Appearance</h3>
         <p className="text-sm text-muted-foreground">
-          Customize the appearance of the app. Automatically switch between day
+          Customize the appearance of the page. Automatically switch between day
           and night themes.
         </p>
       </div>
@@ -119,7 +119,7 @@ const onSubmit=async(data: AppearanceFormValues)=> {
               <FormItem className="space-y-1">
                 <FormLabel>Theme</FormLabel>
                 <FormDescription>
-                  Select the theme for the dashboard.
+                  Select the theme for the page.
                 </FormDescription>
                 <FormMessage />
                 <RadioGroup

@@ -22,19 +22,20 @@ import { ArrowLeft } from 'lucide-react'
 const additionalFormSchema = z.object({
   thankyouPageTitle: z
   .string()
-  .min(1, { message: "Thank you page title is required" }),
+  .min(1, { message: "Thank you page title is required" })
+  .max(20, { message: "Title must not be longer than 20 characters.", }),
   thankyouPageText: z
   .string()
-  .min(1, { message: "Thank you page text is required" }),
+  .min(1, { message: "Thank you page text is required" })
+  .max(120, { message: "Thankyou must not be longer than 120 characters.", }),
 })
-
 
 const AdditionalForm = ({setActiveItem , setFormData, formData}: {setActiveItem: (name: string) => void, setFormData:any, formData:any}) => {
 
   type additionalFormValues = z.infer<typeof additionalFormSchema>
 
 const defaultValues: Partial<additionalFormValues> = {
-thankyouPageText:formData.thankyouPageText ||"Thanks alot for the feedback it means a ton to us",
+thankyouPageText:formData.thankyouPageText ||"Thanks alot for the feedback it means a alot to us",
 thankyouPageTitle:formData.thankyouPageTitle ||"Thank you!"
 }
 
@@ -70,10 +71,6 @@ thankyouPageTitle:formData.thankyouPageTitle ||"Thank you!"
               <FormControl>
                 <Input placeholder="Thank you!" {...field} />
               </FormControl>
-              <FormDescription>
-                This is the name that will be displayed on your profile and in
-                emails.
-              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -87,15 +84,11 @@ thankyouPageTitle:formData.thankyouPageTitle ||"Thank you!"
               <FormLabel>Message</FormLabel>
               <FormControl>
                 <Textarea
-                  placeholder="Thanks alot for the feedback it means a ton to us"
+                  placeholder="Thanks alot for the feedback it means a alot to us"
                   className="resize-none"
                   {...field}
                 />
               </FormControl>
-              <FormDescription>
-                You can <span>@mention</span> other users and organizations to
-                link to them.
-              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -103,7 +96,7 @@ thankyouPageTitle:formData.thankyouPageTitle ||"Thank you!"
        
         <div className='flex items-center gap-8'>
           <Button variant={'outline'} className='flex items-center' onClick={()=>setActiveItem('space')}><ArrowLeft className='size-3 mr-2 ' />Space</Button> 
-          <Button type='submit'>Update appearance</Button>
+          <Button type='submit'>Move to appearance</Button>
           </div>
       </form>
     </Form>
