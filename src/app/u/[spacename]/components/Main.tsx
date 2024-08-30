@@ -130,10 +130,10 @@ const Main = ({ spaceData }: { spaceData: Space }) => {
         </div>
 
         <div className="pt-8 md:pt-12 flex flex-col gap-4 md:gap-6 pb-8 md:pb-12">
-          <h3 className="font-semibold text-2xl md:text-3xl">
+          <h3 className="font-semibold text-xl md:text-3xl">
             Tips to write a <span className="text-[#EA580C]">feedback</span>
           </h3>
-          <ul className="list-disc flex flex-col gap-2">
+          <ul className="list-disc flex flex-col gap-2 text-sm">
             <li>
               Clearly identify what you are giving feedback about. Vague
               comments can be confusing and unhelpful.
