@@ -134,7 +134,7 @@ const SpaceSettings = ({spaceUrl, space}:{spaceUrl:string, space:Space}) => {
                             <DialogHeader>
                                 <DialogTitle>Are you sure?</DialogTitle>
                                 <DialogDescription>
-                                    Once deleted it cannot be retrieved
+                                Once deleted, all testimonials in this space will be gone forever. Please be certain!
                                 </DialogDescription>
                             </DialogHeader>
                             <Button

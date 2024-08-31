@@ -79,12 +79,6 @@ const Main = () => {
 
       <div className='w-full h-[60vh] flex items-start'>
        
-        <button
-          className='lg:hidden block py-4 md:px-2 text-muted-foreground '
-          onClick={() => setSidebarOpen(!sidebarOpen)}
-        >
-          <Menu size={20} />
-        </button>
 
         <Sidebar
           setSideBarOption={setSideBarOption}
@@ -114,10 +108,16 @@ const Main = () => {
             <GetApi spacename={space?.name}/>
           ) : (
             <>
-              <div className='p-4 w-full flex items-center justify-end'>
+              <div className='p-2 w-full flex items-center justify-between'>
+              <button
+          className='lg:hidden block py-4 md:px-2 text-muted-foreground '
+          onClick={() => setSidebarOpen(!sidebarOpen)}
+        >
+          <Menu size={20} />
+        </button>
                 <h4 className='text-left'>{messages.length} Messages</h4>
               </div>
-              <ScrollArea className='md:h-[62vh] h-[65vh] w-full rounded-md md:px-12 md:py-4'>
+              <ScrollArea className=' h-[65vh] w-full rounded-md md:px-12 md:py-4'>
                 {messages.map((message: Message) => (
                   <MessageComponent
                     message={message}

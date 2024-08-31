@@ -23,7 +23,7 @@ import {
 import { Message } from '@/schemas/Message';
 import { Button } from '@/components/ui/button';
 
-const MessageComponent = ({ message,setLikeMessage, likeMessage }: { message: Message, setLikeMessage:(option:boolean)=>void, likeMessage:boolean}) => {
+const MessageComponent = ({ message, setLikeMessage, likeMessage }: { message: Message, setLikeMessage: (option: boolean) => void, likeMessage: boolean }) => {
   const [loading, setLoading] = useState(false);
   const [isLiked, setIsLiked] = useState(message.isLiked);
   const dispatch = useAppDispatch();
@@ -64,43 +64,42 @@ const MessageComponent = ({ message,setLikeMessage, likeMessage }: { message: Me
       key={message._id}
       className="w-full bg-neutral-100 dark:bg-neutral-900 rounded-lg p-6 my-4 shadow-lg"
     >
-      <div className="w-full flex items-center justify-between pb-4">
+      <div className="w-full flex items-center justify-between pb-2">
         <div className="flex items-center gap-4">
-          {message.image && (
-            <Avatar className="h-12 w-12">
-              <AvatarImage src={message?.image} />
-              <AvatarFallback>pf</AvatarFallback>
-            </Avatar>
-          )}
+
+          <Avatar className="h-12 w-12">
+            <AvatarImage src={message?.image} />
+            <AvatarFallback>{message?.name[0]}</AvatarFallback>
+          </Avatar>
           <h3 className="font-semibold text-lg">
             {message?.name}
           </h3>
         </div>
-<div className='flex items-center md:gap-3 '>
-<Button variant="link" size="icon" onClick={() => handleMessageLike(message?._id)}>
-              <Heart className="text-primary md:size-6 size-5" fill={isLiked ? '#EA580C' : 'transparent'}/>
-            </Button>
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="link" size="icon">
-              <IoIosArrowDown className="text-muted-foreground" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="border-none p-2 mx-0">
-            <DropdownMenuItem
-              className="cursor-pointer text-destructive"
-              onClick={() => setShowDeleteDialog(true)}
-            >
-              Delete
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <div className='flex items-center md:gap-3 '>
+          <Button variant="link" size="icon" onClick={() => handleMessageLike(message?._id)}>
+            <Heart className="text-primary md:size-6 size-5" fill={isLiked ? '#EA580C' : 'transparent'} />
+          </Button>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="link" size="icon">
+                <IoIosArrowDown className="text-muted-foreground" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="border-none p-2 mx-0">
+              <DropdownMenuItem
+                className="cursor-pointer text-destructive"
+                onClick={() => setShowDeleteDialog(true)}
+              >
+                Delete
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       </div>
       <div className="py-4 md:w-[80%] sm:w-[90%] w-[95%]">
-        <p className='tracking-wide leading-relaxed pb-4 md:text-lg text-sm'>{message?.feedback}</p>
+        <p className='tracking-wide leading-relaxed  md:text-[16px] text-sm'>{message?.feedback}</p>
       </div>
-      <div className="w-full flex md:flex-row flex-col gap-3 items-start justify-between text-sm">
+      <div className="w-full flex md:flex-row flex-col gap-2 items-start justify-between text-sm">
         <p className="font-semibold">
           Email:{' '}
           <span className="font-medium text-muted-foreground">{message?.email}</span>
@@ -123,7 +122,7 @@ const MessageComponent = ({ message,setLikeMessage, likeMessage }: { message: Me
           <DialogHeader>
             <DialogTitle>Are you sure?</DialogTitle>
             <DialogDescription>
-              Once deleted, it cannot be retrieved.
+              Once confirmed, this feedback will be permanently removed.
             </DialogDescription>
           </DialogHeader>
           <Button
