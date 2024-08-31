@@ -99,7 +99,7 @@ const MessageComponent = ({ message, setLikeMessage, likeMessage }: { message: M
       <div className="py-4 md:w-[80%] sm:w-[90%] w-[95%]">
         <p className='tracking-wide leading-relaxed  md:text-[16px] text-sm'>{message?.feedback}</p>
       </div>
-      <div className="w-full flex md:flex-row flex-col gap-2 items-start justify-between text-sm">
+      <div className="w-full flex md:flex-row flex-col gap-1 items-start justify-between md:text-sm text-xs">
         <p className="font-semibold">
           Email:{' '}
           <span className="font-medium text-muted-foreground">{message?.email}</span>
