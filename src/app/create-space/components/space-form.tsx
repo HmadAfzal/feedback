@@ -28,14 +28,16 @@ const spaceFormSchema = z.object({
     .regex(/^[a-z0-9]+$/, { message: 'Only characters from a-z and numbers from 0-9 are allowed' })
     .min(2, { message: "Name must be at least 2 characters.", })
     .max(30, { message: "Name must not be longer than 30 characters.", }),
-  title: z.
-    string()
-    .min(1, { message: "Title is required" })
-    .max(30, { message: "Title must not be longer than 30 characters." }),
+    title: z
+    .string()
+    .min(1, { message: "Title is Required" })
+    .max(120, { message: "Title must not be longer than 120 characters." }),
   description: z
     .string()
-    .min(1, { message: "description is required" })
-    .max(120, { message: "description must not be longer than 120 characters." }),
+    .min(20, { message: "Description is Required" })
+    .max(200, {
+      message: "description must not be longer than 200 characters.",
+    }),
   buttonText: z
     .string()
     .min(1, { message: "Button text is required" })

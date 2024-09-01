@@ -68,7 +68,7 @@ const Main = () => {
 
   return (
     <>
-    <div >
+    <div className='min-h-screen'  >
       <Separator className='my-4' />
       {space && (
         <>

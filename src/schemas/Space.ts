@@ -13,12 +13,12 @@ export const SpaceSchema = z.object({
   title: z
     .string()
     .min(1, { message: "Title is Required" })
-    .max(30, { message: "Title must not be longer than 30 characters." }),
+    .max(120, { message: "Title must not be longer than 120 characters." }),
   description: z
     .string()
     .min(20, { message: "Description is Required" })
-    .max(120, {
-      message: "description must not be longer than 120 characters.",
+    .max(200, {
+      message: "description must not be longer than 200 characters.",
     }),
   theme: z.enum(["light", "dark"], { message: "Please select a theme." }),
   buttonText: z
@@ -65,11 +65,11 @@ export const EditSpaceSchema = z.object({
   title: z
     .string()
     .min(1, { message: "Title is Required" })
-    .max(30, { message: "Title must not be longer than 30 characters." }),
+    .max(120, { message: "Title must not be longer than 120 characters." }),
   description: z
     .string()
     .min(20, { message: "Description is Required" })
-    .max(120, {
-      message: "description must not be longer than 120 characters.",
+    .max(200, {
+      message: "description must not be longer than 200 characters.",
     }),
 });

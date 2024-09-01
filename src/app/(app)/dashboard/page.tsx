@@ -3,7 +3,7 @@ import Dashboard from './components/Dashboard';
 
 const page = () => {  
   return (
-    <div>
+    <div className='min-h-screen'>
       <Dashboard />
     </div>
   );
