@@ -4,40 +4,62 @@ import ThemeToggle from './ThemeToggle'
 import { Separator } from './ui/separator'
 import { GitHubLogoIcon, InstagramLogoIcon, TwitterLogoIcon } from '@radix-ui/react-icons'
 import Link from 'next/link'
-import { X } from 'lucide-react'
+
+const SocialLinks = () => (
+  <div className='flex items-center gap-6'>
+    <a href="https://github.com" aria-label="GitHub">
+      <GitHubLogoIcon className='w-4 h-4 cursor-pointer hover:text-primary-foreground transition-colors duration-200' />
+    </a>
+    <a href="https://twitter.com" aria-label="Twitter">
+      <TwitterLogoIcon className='w-4 h-4 cursor-pointer hover:text-primary-foreground transition-colors duration-200' />
+    </a>
+    <a href="https://instagram.com" aria-label="Instagram">
+      <InstagramLogoIcon className='w-4 h-4 cursor-pointer hover:text-primary-foreground transition-colors duration-200' />
+    </a>
+  </div>
+)
+
+const NavLinks = ({ links }:{links:any}) => (
+  <nav className='flex lg:flex-row flex-col lg:gap-16 gap-4'>
+    {links.map(({ href, label }:{ href:any, label:any }) => (
+      <Link key={href} href={href} className='hover:text-primary-foreground transition-colors duration-200'>
+        {label}
+      </Link>
+    ))}
+  </nav>
+)
 
 const Footer = () => {
+  const leftLinks = [
+    { href: '/', label: 'Home' },
+    { href: '/create-space', label: 'Create Space' },
+    { href: '/contact', label: 'Contact Us' },
+    { href: '/terms', label: 'Terms of Service' }
+  ]
+  
+  const rightLinks = [
+    { href: '/privacy', label: 'Privacy Policy' },
+    { href: '/docs', label: 'Documentation' },
+    { href: '/pricing', label: 'Pricing' },
+    { href: '/help', label: 'Help' }
+  ]
+
   return (
     <div className='my-12'>
-    <Separator className='my-4'/>
-    <div className='pt-10 md:px-16 px-2'>
-      <div className='w-full flex items-center justify-between mb-12'>
-        <h1 className='font-bold text-3xl'>Feedback</h1> 
-        <ThemeToggle/>
-      </div>
-      <div className=' text-muted-foreground text-sm flex items-center justify-between '> 
-        <div className='flex lg:flex-row flex-col lg:gap-16 gap-8 items-center'>
-        <div className='flex items-center gap-8'> 
-            <GitHubLogoIcon className='size-4 cursor-pointer hover:text-primary-foreground'/> 
-            <TwitterLogoIcon className='size-4 cursor-pointer hover:text-primary-foreground'/>
-            <InstagramLogoIcon className='size-4 cursor-pointer hover:text-primary-foreground'/>
+      <Separator className='my-4' />
+      <div className='pt-10 md:px-16 px-4'>
+        <div className='w-full flex items-center justify-between mb-12'>
+          <h1 className='font-bold text-3xl'>Feedback</h1>
+          <ThemeToggle />
         </div>
-        <div className='flex lg:flex-row flex-col lg:items-center items-start lg:gap-16 gap-2 justify-between'>
-        <Link className='hover:text-primary-foreground' href={'/'}>Home</Link>
-        <Link className='hover:text-primary-foreground' href={'/create-space'}>Create Space</Link>
-        <Link className='hover:text-primary-foreground' href={'/contact'}>Contact Us</Link>
-        <Link className='hover:text-primary-foreground' href={'/terms'}>Terms of Service</Link>
+        <div className='text-muted-foreground text-sm flex flex-row justify-between gap-8'>
+          <div className='flex flex-col lg:flex-row lg:gap-16 gap-8 lg:items-center items:start'>
+            <SocialLinks />
+            <NavLinks links={leftLinks} />
+          </div>
+          <NavLinks links={rightLinks}/>
         </div>
-
-</div>
-        <div className='flex lg:flex-row flex-col lg:items-center items-start lg:gap-16 gap-2 justify-between'>
-        <Link className='hover:text-primary-foreground' href={'/privacy'}>Privacy Policy</Link>
-        <Link className='hover:text-primary-foreground' href={'/docs'}>Documentation</Link>
-        <Link className='hover:text-primary-foreground' href={'/pricing'}>Pricing</Link>
-        <Link className='hover:text-primary-foreground' href={'/help'}>Help</Link>
       </div>
-      </div>
-    </div>
     </div>
   )
 }
