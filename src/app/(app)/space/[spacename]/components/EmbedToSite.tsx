@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import ColorPicker from '@/components/ColorPicker';
+import { Checkbox } from '@/components/ui/checkbox'; // Custom Checkbox import
 import { Label } from '@/components/ui/label';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import CodeBlock from './CodeBlock';
 import { Button } from '@/components/ui/button';
 import { Clipboard, ClipboardCheck } from 'lucide-react';
-import { Checkbox, CheckedState } from '@radix-ui/react-checkbox';
 
+type CheckedState = boolean | 'indeterminate';
 
 const EmbedToSite = ({ spaceId }: { spaceId: string }) => {
   const [backgroundColor, setBackgroundColor] = useState('#FFFFFF');
@@ -44,14 +45,14 @@ const EmbedToSite = ({ spaceId }: { spaceId: string }) => {
 
   return (
     <div className='md:px-12 pt-8'>
-      <h1 className="text-2xl font-bold my-2">Embed to your site</h1>
+      <h1 className="md:text-2xl text-xl font-bold my-2">Embed to your site</h1>
       <p className="text-muted-foreground text-sm">Customize your wall of love</p>
       <ScrollArea className='md:h-[70vh] h-[75vh] w-full rounded-md md:pt-4 pt-2'>
         <div className='w-[95%]'>
           <CodeBlock code={embedCode || '//Your code will appear here'} />
         </div>
         <div className='md:mt-6 mt-4'>
-          <h3 className='font-semibold text-lg'>Select message type</h3>
+          <h3 className='font-semibold md:text-lg text-md'>Select message type & colors</h3>
           <div className='flex gap-4 my-4'>
             <Button
               onClick={() => setMessageType('all')}
@@ -73,7 +74,7 @@ const EmbedToSite = ({ spaceId }: { spaceId: string }) => {
           <ColorPicker label="Text color" selectedColor={textColor} onColorSelect={setTextColor} />
         </div>
         <div className="space-y-4 mt-8">
-          <h3 className='font-semibold text-lg'>More customizations</h3>
+          <h3 className='font-semibold  md:text-lg text-md'>More customizations</h3>
           <div className="flex items-center space-x-2 ">
             <Checkbox id="hideDate" checked={hideDate} onCheckedChange={handleCheckboxChange(setHideDate)} />
             <Label htmlFor="hideDate" className="text-sm font-medium">
