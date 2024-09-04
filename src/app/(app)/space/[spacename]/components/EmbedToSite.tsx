@@ -16,7 +16,6 @@ const EmbedToSite = ({ spaceId }: { spaceId: string }) => {
   const [sameHeight, setSameHeight] = useState(false);
   const [enableShadow, setEnableShadow] = useState(false);
   const [messageType, setMessageType] = useState('all');
-  const [loading, setLoading] = useState(false);
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async () => {
