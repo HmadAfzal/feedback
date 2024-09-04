@@ -108,7 +108,7 @@ const Main = () => {
             <GetApi spacename={space?.name}/>
           ) : (
             <>
-              <div className='p-2 w-full flex items-center justify-between'>
+              <div className='p-2 w-full flex items-center justify-between lg:justify-end'>
               <button
           className='lg:hidden block py-4 md:px-2 text-muted-foreground '
           onClick={() => setSidebarOpen(!sidebarOpen)}

@@ -1,35 +1,41 @@
-import React, { useState } from 'react';
-import { Copy } from 'lucide-react'; // Importing an icon for the copy button
-import { Button } from '@/components/ui/button';
+"use client"
 
-const CodeBlock = ({ code }: { code: string }) => {
-    const [copied, setCopied] = useState(false);
+import React from 'react';
+import { Highlight, themes } from 'prism-react-renderer'
 
-    const handleCopy = async () => {
-        try {
-            await navigator.clipboard.writeText(code);
-            setCopied(true);
-            setTimeout(() => setCopied(false), 2000); 
-        } catch (error) {
-            console.error('Failed to copy:', error);
-        }
-    };
+interface CodeBlockProps {
+  code: string;
+  language?: string;
+}
 
-    return (
-        <div className="relative w-full bg-card text-card-foreground p-6 rounded-lg shadow-md">
-            <pre className="overflow-x-auto whitespace-pre-wrap text-sm font-mono w-full">
-                <code>{code}</code>
-            </pre>
-            <Button
-                onClick={handleCopy}
-                className="absolute top-3 right-3 p-2 bg-muted hover:bg-primary transition-all text-primary-foreground rounded-lg"
-                variant="ghost"
-                size="sm"
-            >
-                {copied ? "Copied!" : <Copy size={16} />}
-            </Button>
-        </div>
-    );
+const CodeBlock = ({ code, language = 'javascript' }: CodeBlockProps) => {
+
+
+  return (
+    <div className="relative text-sm text-card-foreground rounded-lg bg-[#1e1e1e] overflow-auto p-2 max-w-[88%]">
+      <Highlight theme={themes.vsDark} code={code} language={language as any}>
+        {({ className, style, tokens, getLineProps, getTokenProps }) => (
+          <pre 
+            className={`${className} overflow-x-auto py-2 `}
+            style={{
+              ...style,
+              backgroundColor: 'transparent',
+              marginTop: 0,
+              marginBottom: 0,
+            }}
+          >
+            {tokens.map((line, i) => (
+              <div key={i} {...getLineProps({ line, key: i })}>
+                {line.map((token, key) => (
+                  <span key={key} {...getTokenProps({ token, key })} />
+                ))}
+              </div>
+            ))}
+          </pre>
+        )}
+      </Highlight>
+    </div>
+  );
 };
 
 export default CodeBlock;
