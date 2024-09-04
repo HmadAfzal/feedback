@@ -1,14 +1,12 @@
-'use client';
+import React, { useState } from 'react';
 import ColorPicker from '@/components/ColorPicker';
-import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import React, { useState } from 'react';
 import CodeBlock from './CodeBlock';
 import { Button } from '@/components/ui/button';
-import { Clipboard, ClipboardCheck, Loader2 } from 'lucide-react';
-import { toast } from '@/components/ui/use-toast';
-import axios from 'axios';
+import { Clipboard, ClipboardCheck } from 'lucide-react';
+import { Checkbox, CheckedState } from '@radix-ui/react-checkbox';
+
 
 const EmbedToSite = ({ spaceId }: { spaceId: string }) => {
   const [backgroundColor, setBackgroundColor] = useState('#FFFFFF');
@@ -19,44 +17,6 @@ const EmbedToSite = ({ spaceId }: { spaceId: string }) => {
   const [enableShadow, setEnableShadow] = useState(false);
   const [messageType, setMessageType] = useState('all');
   const [loading, setLoading] = useState(false);
-
-  // const handleEmbedClick = async () => {
-  //   try {
-  //     setLoading(true);
-  //     setLoading(true)
-  //     const response = await axios.get(`/api/generate-embed-code`, {
-  //       params: {
-  //         spaceId,
-  //         type: messageType,
-  //         backgroundColor,
-  //         cardColor,
-  //         textColor,
-  //         hideDate,
-  //         sameHeight,
-  //         enableShadow
-  //       },
-  //     });
-  //     setEmbedCode(response.data.embedCode);
-  //   } catch (error: any) {
-  //     console.error('Error generating embed code:', error);
-  //     toast({
-  //       title: 'Error',
-  //       description: 'Error in generating embed code',
-  //       variant: 'destructive',
-  //     });
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
-
-  const baseUrl = `${window.location.protocol}//${window.location.host}`;
-const iframeSrc = `${baseUrl}/embed/${spaceId}?type=${messageType}&bgColor=${backgroundColor}
-  &cardBgColor=${cardColor}&textColor=${textColor}&hideDate=${hideDate}&sameHeight=${sameHeight}&enableShadow=${enableShadow}`;
-const embedCode = `  <iframe id="embed-${spaceId}"
-  src="${iframeSrc}" frameborder="0" scrolling="no"width="100%"></iframe>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/4.3.2/iframeResizer.min.js"></script>
-  <script type="text/javascript">iFrameResize({ log: false, checkOrigin: false },'#embed-${spaceId}');</script>`;
-
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async () => {
@@ -68,6 +28,20 @@ const embedCode = `  <iframe id="embed-${spaceId}"
       console.error('Failed to copy:', error);
     }
   };
+
+  const handleCheckboxChange = (setter: React.Dispatch<React.SetStateAction<boolean>>) => (checked: CheckedState) => {
+    if (typeof checked === 'boolean') {
+      setter(checked);
+    }
+  };
+
+  const baseUrl = `${window.location.protocol}//${window.location.host}`;
+  const iframeSrc = `${baseUrl}/embed/${spaceId}?type=${messageType}&bgColor=${backgroundColor}
+  &cardBgColor=${cardColor}&textColor=${textColor}&hideDate=${hideDate}&sameHeight=${sameHeight}&enableShadow=${enableShadow}`;
+  const embedCode = `  <iframe id="embed-${spaceId}"
+  src="${iframeSrc}" frameborder="0" scrolling="no" width="100%"></iframe>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/4.3.2/iframeResizer.min.js"></script>
+  <script type="text/javascript">iFrameResize({ log: false, checkOrigin: false },'#embed-${spaceId}');</script>`;
 
   return (
     <div className='md:px-12 pt-8'>
@@ -102,27 +76,27 @@ const embedCode = `  <iframe id="embed-${spaceId}"
         <div className="space-y-4 mt-8">
           <h3 className='font-semibold text-lg'>More customizations</h3>
           <div className="flex items-center space-x-2 ">
-            <Checkbox id="hideDate" checked={hideDate} onCheckedChange={setHideDate} />
+            <Checkbox id="hideDate" checked={hideDate} onCheckedChange={handleCheckboxChange(setHideDate)} />
             <Label htmlFor="hideDate" className="text-sm font-medium">
               Hide Date
             </Label>
           </div>
           <div className="flex items-center space-x-2">
-            <Checkbox id="sameHeight" checked={sameHeight} onCheckedChange={setSameHeight} />
+            <Checkbox id="sameHeight" checked={sameHeight} onCheckedChange={handleCheckboxChange(setSameHeight)} />
             <Label htmlFor="sameHeight" className="text-sm font-medium">
               Same height for all texts
             </Label>
           </div>
           <div className="flex items-center space-x-2">
-            <Checkbox id="enableShadow" checked={enableShadow} onCheckedChange={setEnableShadow} />
+            <Checkbox id="enableShadow" checked={enableShadow} onCheckedChange={handleCheckboxChange(setEnableShadow)} />
             <Label htmlFor="enableShadow" className="text-sm font-medium">
               Enable shadow
             </Label>
           </div>
         </div>
         <Button onClick={handleCopy} className='my-4'>
-        {copied ?<> <ClipboardCheck className="size-4 mr-2" />Copied!</> :<> <Clipboard className="size-4 mr-2" />Copy code</> }
-      </Button>
+          {copied ? <> <ClipboardCheck className="size-4 mr-2" />Copied!</> : <> <Clipboard className="size-4 mr-2" />Copy code</>}
+        </Button>
       </ScrollArea>
     </div>
   );
