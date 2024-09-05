@@ -1,18 +1,16 @@
 import React, { useState } from 'react';
 import ColorPicker from '@/components/ColorPicker';
-import { Checkbox } from '@/components/ui/checkbox'; // Custom Checkbox import
+import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import CodeBlock from './CodeBlock';
 import { Button } from '@/components/ui/button';
 import { Clipboard, ClipboardCheck } from 'lucide-react';
 
-type CheckedState = boolean | 'indeterminate';
-
 const EmbedToSite = ({ spaceId }: { spaceId: string }) => {
-  const [backgroundColor, setBackgroundColor] = useState('#FFFFFF');
-  const [cardColor, setCardColor] = useState('#FFFFFF');
-  const [textColor, setTextColor] = useState('#000000');
+  const [backgroundColor, setBackgroundColor] = useState('ffffff');
+  const [cardColor, setCardColor] = useState('f1f1f1');
+  const [textColor, setTextColor] = useState('000000');
   const [hideDate, setHideDate] = useState(false);
   const [sameHeight, setSameHeight] = useState(false);
   const [enableShadow, setEnableShadow] = useState(false);
@@ -29,27 +27,29 @@ const EmbedToSite = ({ spaceId }: { spaceId: string }) => {
     }
   };
 
-  const handleCheckboxChange = (setter: React.Dispatch<React.SetStateAction<boolean>>) => (checked: CheckedState) => {
+  const handleCheckboxChange = (setter: React.Dispatch<React.SetStateAction<boolean>>) => (checked: boolean | 'indeterminate') => {
     if (typeof checked === 'boolean') {
       setter(checked);
     }
   };
 
   const baseUrl = `${window.location.protocol}//${window.location.host}`;
-  const iframeSrc = `${baseUrl}/embed/${spaceId}?type=${messageType}&bgColor=${backgroundColor}
-  &cardBgColor=${cardColor}&textColor=${textColor}&hideDate=${hideDate}&sameHeight=${sameHeight}&enableShadow=${enableShadow}`;
-  const embedCode = `  <iframe id="embed-${spaceId}"
+  const iframeSrc = `${baseUrl}/embed/${spaceId}?type=${messageType}&bgColor=${encodeURIComponent(backgroundColor.slice(1))}&cardBgColor=${encodeURIComponent(cardColor.slice(1))}&textColor=${encodeURIComponent(textColor.slice(1))}&hideDate=${hideDate}&sameHeight=${sameHeight}&enableShadow=${enableShadow}`;
+  
+  const embedCode = `
+  <iframe id="embed-${spaceId}"
   src="${iframeSrc}" frameborder="0" scrolling="no" width="100%"></iframe>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/4.3.2/iframeResizer.min.js"></script>
-  <script type="text/javascript">iFrameResize({ log: false, checkOrigin: false },'#embed-${spaceId}');</script>`;
+  <script type="text/javascript">iFrameResize({ log: false, checkOrigin: false },'#embed-${spaceId}');</script>
+  `;
 
   return (
     <div className='md:px-12 pt-8'>
       <h1 className="md:text-2xl text-xl font-bold my-2">Embed to your site</h1>
       <p className="text-muted-foreground text-sm">Customize your wall of love</p>
       <ScrollArea className='md:h-[70vh] h-[75vh] w-full rounded-md md:pt-4 pt-2'>
-        <div className='w-[95%]'>
-          <CodeBlock code={embedCode || '//Your code will appear here'} />
+        <div className='w-[80%]'>
+          <CodeBlock code={embedCode || '//Something went wrong. Please try again later.'} />
         </div>
         <div className='md:mt-6 mt-4'>
           <h3 className='font-semibold md:text-lg text-md'>Select message type & colors</h3>

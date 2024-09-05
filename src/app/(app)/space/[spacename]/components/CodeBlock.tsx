@@ -10,7 +10,7 @@ const CodeBlock = ({ code, language = 'javascript' }: CodeBlockProps) => {
 
 
   return (
-    <div className="relative text-sm text-card-foreground rounded-lg bg-[#1e1e1e] overflow-auto p-2 max-w-[88%]">
+    <div className="relative text-sm text-card-foreground rounded-lg bg-[#1e1e1e] overflow-auto p-2 max-w-[65%]">
       <Highlight theme={themes.vsDark} code={code} language={language as any}>
         {({ className, style, tokens, getLineProps, getTokenProps }) => (
           <pre 
