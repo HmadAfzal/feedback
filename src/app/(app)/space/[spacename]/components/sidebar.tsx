@@ -37,7 +37,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setSideBarOption, sidebarOpen, setSid
     <div
       className={`fixed inset-y-0 left-0 z-50 transform ${
         sidebarOpen ? 'translate-x-0' : '-translate-x-full'
-      } transition-transform duration-300 ease-in-out lg:translate-x-0 lg:relative lg:w-[20%] dark:bg-[#121212] bg-[#FFFFFF] p-6 md:p-4`}
+      } transition-transform duration-300 ease-in-out lg:translate-x-0 lg:relative lg:w-[20%] bg-background text-foreground p-6 md:p-4`}
     >
       {menuItems.map((menu, index) => (
         <div key={index} className='mb-8'>
