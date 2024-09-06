@@ -12,9 +12,6 @@ const Footer = () => {
             <div className="grid gap-8 xl:grid-cols-3 xl:gap-8 w-full">
 
                 <div className="flex flex-col items-start justify-start md:max-w-[200px]">
-                    <div className="flex items-start">
-                        <Icons.logo className="w-7 h-7" />
-                    </div>
                     <p className="text-muted-foreground mt-4 text-sm text-start">
                         Build beautiful, functional websites, without writing code
                     </p>
