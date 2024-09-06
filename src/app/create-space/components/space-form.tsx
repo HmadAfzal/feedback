@@ -34,7 +34,7 @@ const spaceFormSchema = z.object({
     .max(120, { message: "Title must not be longer than 120 characters." }),
   description: z
     .string()
-    .min(20, { message: "Description is Required" })
+    .min(1, { message: "Description is Required" })
     .max(200, {
       message: "description must not be longer than 200 characters.",
     }),

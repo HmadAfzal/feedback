@@ -4,6 +4,7 @@ import { Space } from '@/schemas/Space';
 import SpaceEdit from './SpaceEdit';
 import SpaceSettings from '@/components/SpaceSettings';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import Link from 'next/link';
 
 const SpaceHeader = ({ space }: { space: Space }) => {
     const baseUrl = `${window.location.protocol}//${window.location.host}`;
@@ -25,11 +26,11 @@ const SpaceHeader = ({ space }: { space: Space }) => {
        </div> 
                 </div>
                 <div>
-                <div className='flex items-center gap-2 text-muted-foreground hover:underline [w-90%]'>
+                <Link href={spaceUrl} className='flex items-center gap-2 text-muted-foreground hover:underline [w-90%]'>
                          <Link2 className='md:size-6 size-5' />
                          <span className='block sm:hidden text-sm'>{truncatedUrl}</span>
                       <span className='hidden sm:block text-md '>{spaceUrl}</span>
-                     </div>  
+                     </Link>  
                 </div>
             </div>
         </div>

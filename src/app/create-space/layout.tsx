@@ -4,7 +4,7 @@ import { Metadata } from "next"
 
 export const metadata: Metadata = {
   title: "Create space",
-  description: "Advanced form example using react-hook-form and Zod.",
+  description: "Create a space to get started",
 }
 
 
