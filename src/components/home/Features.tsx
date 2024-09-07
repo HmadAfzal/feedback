@@ -11,13 +11,12 @@ const Features = () => {
     <div className="hidden md:block absolute top-0 -right-1/3 w-72 h-72 bg-primary rounded-full blur-[10rem] -z-10"></div>
     <div className="hidden md:block absolute bottom-0 -left-1/3 w-72 h-72 bg-primary rounded-full blur-[10rem] -z-10"></div>
     <Container>
-        <div className="max-w-md mx-auto text-start md:text-center">
-            <SectionBadge title="Features" />
-            <h2 className="text-3xl lg:text-4xl font-semibold mt-6">
+    <div className=" w-2xl mx-auto text-start md:text-center">
+    <h2 className="text-3xl lg:text-6xl font-bold mt-6">
                 Discover our powerful features
             </h2>
             <p className="text-muted-foreground mt-6">
-                Astra offers a range of features to help you build a stunning website in no time
+                We offer a range of features to help you collect feedbacks easily
             </p>
         </div>
     </Container>

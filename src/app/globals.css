@@ -79,8 +79,8 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  color: hsl(var(--primary));
-  background-color: hsl(var(--primary));
+  color: hsl(var(--muted));
+  background-color: hsl(var(--muted));
   border-radius: 8px;
 }
 

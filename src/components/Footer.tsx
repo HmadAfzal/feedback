@@ -32,16 +32,17 @@ const NavLinks = ({ links }:{links:any}) => (
 const Footer = () => {
   const leftLinks = [
     { href: '/', label: 'Home' },
+    { href: '/dashboard', label: 'Dashboard' },
     { href: '/create-space', label: 'Create Space' },
     { href: '/contact', label: 'Contact Us' },
-    { href: '/terms', label: 'Terms of Service' }
+    
   ]
   
   const rightLinks = [
     { href: '/privacy', label: 'Privacy Policy' },
     { href: '/docs', label: 'Documentation' },
-    { href: '/pricing', label: 'Pricing' },
-    { href: '/help', label: 'Help' }
+    { href: '/help', label: 'Help' },
+    { href: '/terms', label: 'Terms of Service' }
   ]
 
   return (

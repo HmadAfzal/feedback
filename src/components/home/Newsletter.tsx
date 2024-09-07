@@ -13,11 +13,11 @@ const Newsletter = () => {
     <Container>
         <LampContainer>
             <div className="flex flex-col items-center justify-center relative w-full text-center">
-                <h2 className="text-4xl lg:text-5xl xl:text-6xl lg:!leading-snug font-semibold mt-8">
-                    From Idea to Launch <br /> Faster Than Ever
+                <h2 className="text-4xl lg:text-6xl xl:text-6xl lg:!leading-snug font-bold mt-8">
+                The best feedbacks <br /> all in one place
                 </h2>
                 <p className="text-muted-foreground mt-6 max-w-md mx-auto">
-                    Build stunning websites with Astra&apos;s intuitive drag-and-drop builder and powerful AI assistant
+                    Build a stunning Feedback section with no efforts and zero code
                 </p>
                 <Button  className="mt-6" asChild>
                     <Link href="/sign-in">
@@ -36,7 +36,7 @@ const Newsletter = () => {
                         Join our newsletter
                     </h4>
                     <p className="text-base text-muted-foreground">
-                        Be up to date with everything about AI builder
+                        Be up to date with everything about Feedback
                     </p>
                 </div>
                 <div className="flex flex-col items-start gap-2 md:min-w-80 mt-5 md:mt-0 w-full md:w-max">

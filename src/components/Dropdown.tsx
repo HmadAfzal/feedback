@@ -41,6 +41,9 @@ export function Dropdown() {
           <Link href={"/dashboard"}>Dashboard</Link>
           </DropdownMenuItem>
           <DropdownMenuItem className="flex items-center justify-between py-2 rounded-lg px-2">
+          <Link href={"/"}>Home</Link>
+          </DropdownMenuItem>
+          <DropdownMenuItem className="flex items-center justify-between py-2 rounded-lg px-2">
             <span>
               <Link href={"/create-space"}>Create space</Link>
             </span>

@@ -1,17 +1,11 @@
-import Container from '@/components/home/Container'
 import Features from '@/components/home/Features'
-import Footer from '@/components/home/Footer'
+import Footer from '@/components/Footer'
 import Hero from '@/components/home/Hero'
-import Navbar from '@/components/home/Nav'
 import Newsletter from '@/components/home/Newsletter'
-import Pricing from '@/components/home/Pricing'
 import Process from '@/components/home/Process'
-import SectionBadge from '@/components/home/section-badge'
 import Testimonial from '@/components/home/Testimonial'
-import Wrapper from '@/components/home/Wrapper'
-import { perks } from '@/constants'
-import { cn } from '@/lib/utils'
 import React from 'react'
+import Navbar from '@/components/home/Nav'
 
 const page = () => {
   return (
@@ -22,7 +16,8 @@ const page = () => {
         <Hero />
         <Process />
         <Features />
-        <Pricing />
+        {/*removed pricing for now*/}
+        {/* <Pricing /> */}
         <Testimonial />
         <Newsletter />
       </section>
