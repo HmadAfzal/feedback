@@ -58,7 +58,7 @@ export function Dropdown() {
             <span><Link href={"https://github.com/HmadAfzal/feedback"}>GitHub</Link></span>
           </DropdownMenuItem>
           <DropdownMenuItem className="flex items-center justify-between py-2 rounded-lg px-2">
-            <span>Support</span>
+            <span><Link href={"/building"}>Support</Link></span>
             <LifeBuoy className="mr-2 h-4 w-4" />
           </DropdownMenuItem>
           <DropdownMenuSeparator />

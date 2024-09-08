@@ -2,18 +2,18 @@
 import React from 'react'
 import ThemeToggle from './ThemeToggle'
 import { Separator } from './ui/separator'
-import { GitHubLogoIcon, InstagramLogoIcon, TwitterLogoIcon } from '@radix-ui/react-icons'
+import { GitHubLogoIcon, InstagramLogoIcon, LinkedInLogoIcon } from '@radix-ui/react-icons'
 import Link from 'next/link'
 
 const SocialLinks = () => (
   <div className='flex items-center gap-6'>
-    <a href="https://github.com" aria-label="GitHub">
+    <a href="https://github.com/HmadAfzal/feedback" aria-label="GitHub">
       <GitHubLogoIcon className='w-4 h-4 cursor-pointer hover:text-primary-foreground transition-colors duration-200' />
     </a>
-    <a href="https://twitter.com" aria-label="Twitter">
-      <TwitterLogoIcon className='w-4 h-4 cursor-pointer hover:text-primary-foreground transition-colors duration-200' />
+    <a href="https://www.linkedin.com/in/hmad-afzal/" aria-label="Linkedin">
+      <LinkedInLogoIcon className='w-4 h-4 cursor-pointer hover:text-primary-foreground transition-colors duration-200' />
     </a>
-    <a href="https://instagram.com" aria-label="Instagram">
+    <a href="https://instagram.com/llha.x" aria-label="Instagram">
       <InstagramLogoIcon className='w-4 h-4 cursor-pointer hover:text-primary-foreground transition-colors duration-200' />
     </a>
   </div>
@@ -34,15 +34,15 @@ const Footer = () => {
     { href: '/', label: 'Home' },
     { href: '/dashboard', label: 'Dashboard' },
     { href: '/create-space', label: 'Create Space' },
-    { href: '/contact', label: 'Contact Us' },
+    { href: '/building', label: 'Contact Us' },
     
   ]
   
   const rightLinks = [
-    { href: '/privacy', label: 'Privacy Policy' },
-    { href: '/docs', label: 'Documentation' },
-    { href: '/help', label: 'Help' },
-    { href: '/terms', label: 'Terms of Service' }
+    { href: '/building', label: 'Privacy Policy' },
+    { href: '/building', label: 'Documentation' },
+    { href: '/building', label: 'Help' },
+    { href: '/building', label: 'Terms of Service' }
   ]
 
   return (
