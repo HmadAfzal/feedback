@@ -6,6 +6,7 @@ import Authprovider from "@/context/Authprovider";
 import { ThemeProvider } from "@/components/theme-provider";
 import ReduxProvider from "@/context/ReduxProvider";
 import { cn } from "@/lib/utils";
+import Footer from "@/components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -37,7 +38,10 @@ export default function RootLayout({
             disableTransitionOnChange
           >           
           <ReduxProvider> 
+            <div className="container">
                 {children}
+                <Footer />
+                </div>
           </ReduxProvider> 
             <Toaster />
           </ThemeProvider>

@@ -16,15 +16,19 @@ const page = () => {
         <Hero />
         <Process />
         <Features />
-        {/*removed pricing for now*/}
-        {/* <Pricing /> */}
         <Testimonial />
         <Newsletter />
       </section>
-      <Footer />
+      
     </div>
 
   )
 }
 
 export default page
+
+
+//TODO : make home nav responsive, landing responsive 
+//add video
+//set spacing (see footer)
+//Final testing

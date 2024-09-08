@@ -48,7 +48,7 @@ const Footer = () => {
   return (
     <div className='my-12'>
       <Separator className='my-4' />
-      <div className='pt-10 md:px-16 px-4'>
+      <div className='pt-10 md:px-10 px-2'>
         <div className='w-full flex items-center justify-between mb-12'>
           <h1 className='font-bold text-3xl'>Feedback</h1>
           <ThemeToggle />
