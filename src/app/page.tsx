@@ -9,6 +9,7 @@ import Navbar from '@/components/home/Nav'
 
 const page = () => {
   return (
+<>
 
     <div className="flex flex-col items-center w-full">
       <Navbar />
@@ -21,7 +22,10 @@ const page = () => {
       </section>
       
     </div>
-
+    <div className='container'>
+<Footer/>
+</div>
+</>
   )
 }
 

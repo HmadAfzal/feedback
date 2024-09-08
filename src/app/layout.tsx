@@ -38,10 +38,7 @@ export default function RootLayout({
             disableTransitionOnChange
           >           
           <ReduxProvider> 
-            <div className="container">
                 {children}
-                <Footer />
-                </div>
           </ReduxProvider> 
             <Toaster />
           </ThemeProvider>
