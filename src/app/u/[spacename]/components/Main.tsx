@@ -85,10 +85,6 @@ const Main = ({ spaceData }: { spaceData: Space }) => {
           publicId: publicId,
         });
         dispatch(addMessage(response?.data.newMessage));
-        toast({
-          title: "Success",
-          description: response?.data.message,
-        });
         form.reset();
         setShowFormDialog(false);
         setShowThankYouDialog(true);

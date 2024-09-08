@@ -30,9 +30,3 @@ const page = () => {
 }
 
 export default page
-
-
-//TODO : make home nav responsive, landing responsive 
-//add video
-//set spacing (see footer)
-//Final testing

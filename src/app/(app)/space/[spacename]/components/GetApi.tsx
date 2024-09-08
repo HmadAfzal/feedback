@@ -1,4 +1,3 @@
-import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import React, { useState } from 'react';
 import CodeBlock from './CodeBlock';

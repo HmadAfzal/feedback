@@ -16,7 +16,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useTheme } from "next-themes";
 import { clearSpaceSlice } from "@/redux/spaceslice";
 import { signOut } from "next-auth/react";
 import { useAppDispatch } from "@/redux/hooks";
@@ -25,8 +24,8 @@ import ThemeToggle from "./ThemeToggle";
 export function Dropdown() {
   const dispatch = useAppDispatch();
   const handleSignout = async () => {
-    dispatch(clearSpaceSlice());
     await signOut();
+     dispatch(clearSpaceSlice());
   };
   return (
     <DropdownMenu>
