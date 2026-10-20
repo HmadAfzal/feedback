@@ -1,6 +1,6 @@
 # 📝 Feedback
 
-### The easiest way to gather feedback, testimonials, and reviews—and embed them on your site.
+### The easiest way to gather feedback, testimonials, and reviews and embed them on your site.
 
 ![App Screenshot](/public/assets/dashboard.png)
 
