@@ -19,6 +19,7 @@ export const authOptions: NextAuthOptions = {
     GitHubProvider({
       clientId: githubClientId,
       clientSecret: githubClientSecret,
+      issuer: "https://github.com/login/oauth",
     }),
     GoogleProvider({
       clientId: googleClientId,
