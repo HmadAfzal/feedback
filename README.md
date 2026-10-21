@@ -102,12 +102,6 @@ Register these in your OAuth apps for local development:
 - GitHub: `http://localhost:3000/api/auth/callback/github`
 - Google: `http://localhost:3000/api/auth/callback/google`
 
-### Cloudinary upload preset
-
-Image uploads use a Cloudinary upload preset. Create one in your Cloudinary dashboard (Settings, Upload, Upload presets), then enter its name in:
-
-- `src/components/SendMessage/Main.tsx`
-- `src/components/dashboardFormPreview.tsx`
 
 ## Scripts
 
@@ -137,10 +131,6 @@ src/
 └── middleware.ts          Route middleware
 ```
 
-## Data model
-
-- **Space**: `name`, `image`, `title`, `description`, `theme` (light or dark), `buttonText`, `thankyouPageTitle`, `thankyouPageText`, `owner`, `messages`
-- **Message**: `name`, `feedback`, `email`, `image`, `isLiked`, `space`
 
 ## Deployment
 
