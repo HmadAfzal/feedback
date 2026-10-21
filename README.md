@@ -1,96 +1,169 @@
-# 📝 Feedback
+# Feedback
 
-### The easiest way to gather feedback, testimonials, and reviews and embed them on your site.
+**Collect feedback from your customers and showcase the best of it on your website.**
 
-![App Screenshot](/public/assets/dashboard.png)
+Create a branded page for your business, share one link, and embed a live testimonial carousel anywhere with a copy-paste snippet.
 
-**Live Demo**: [Feedback.in](https://feedback-in.vercel.app/)
+[Live demo](https://feedback-in.vercel.app/) · [Report a bug](https://github.com/HmadAfzal/feedback/issues)
 
----
+![Next.js](https://img.shields.io/badge/Next.js-14-000000?logo=nextdotjs&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)
+![MongoDB](https://img.shields.io/badge/MongoDB-Mongoose-47A248?logo=mongodb&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3-06B6D4?logo=tailwindcss&logoColor=white)
 
-## 🚀 Steps to Effortlessly Collect and Share Feedback
+![Feedback dashboard](public/assets/dashboard.png)
 
-1️⃣ **Set Up Your Space**: Create a dedicated landing page for your business in less than two minutes.
+## How it works
 
-2️⃣ **Share Your Link**: Distribute the link via email, social media, or SMS to gather feedback from your audience.
+1. **Create a space.** Set up a collection page for your business in a couple of minutes: name, image, headline, description, theme and button text.
+2. **Share the link.** Send it by email, social media or SMS. Customers leave feedback on a clean public page, with an optional photo.
+3. **Curate.** Review everything in one dashboard. Like the testimonials you want to feature, delete the rest.
+4. **Embed.** Copy the generated snippet into your site. Your testimonials appear as a responsive carousel that stays in sync with your dashboard.
 
-3️⃣ **Embed and Display**: Copy and paste the provided HTML code to showcase the collected feedback on your website.
+## Features
 
----
+- **Branded collection pages** with a custom headline, description, image, light or dark theme, button text and thank-you message
+- **Public submission form** with name, feedback, optional email and optional image upload (Cloudinary)
+- **Central dashboard** to manage spaces and feedback: view, like, delete, edit and remove spaces
+- **Embeddable carousel** with colour, date, card-height and shadow options, auto-resizing to fit your page
+- **Social sign-in** with GitHub or Google (NextAuth)
+- **Responsive UI** built with Tailwind CSS and shadcn/ui
 
-## 🌟 Discover Our Powerful Features
+## Embedding on your site
 
-- **Fast Setup**: Create a landing page in less than two minutes.
-- **Customizable Space**: Tailor your space exactly as you like.
-- **Centralized Dashboard**: Manage all feedback in one simple and clean dashboard.
-- **Customizable Display**: Control how feedback appears on your site.
-- **Easy integration**: Easily add feedback to your website.
-- **Responsive Design**: Feedback looks great on any device, from desktop to mobile.
+The dashboard generates the snippet for you with your chosen options. It looks like this:
 
----
-
-## 🛠 Getting Started
-
-To get started with **Feedback**, follow these steps:
-
-1. Clone this repository to your local machine.
-2. Install the necessary dependencies with `npm install`.
-3. Set up your database and environment variables.
-4. Run the application using `npm run dev`.
-5. Access the app through `http://localhost:3000/`.
-
----
-
-## 🧑‍💻 Technologies Used
-
-- **Frontend**: shadcn/ui, Tailwind CSS, AceternityUi, Framer Motion
-- **Backend**: Next.js, TypeScript, Redux, React Hook Form
-- **Database**: MongoDB
-- **Image Storage**: Cloudinary
-- **Authentication**: NextAuth
-
----
-
-## 📄 Environment Setup (.env File)
-
-```bash
-# Database connection string
-MONGO_URI=
-
-# Authentication secret
-NEXTAUTH_SECRET=
-
-# GitHub OAuth credentials
-GITHUB_CLIENT_ID=
-GITHUB_CLIENT_SECRET=
-
-# Google OAuth credentials
-GOOGLE_CLIENT_ID=
-GOOGLE_CLIENT_SECRET=
-
-# Cloudinary credentials
-NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=
-NEXT_PUBLIC_CLOUDINARY_API_KEY=
-NEXT_PUBLIC_CLOUDINARY_API_SECRET=
+```html
+<iframe id="embed-SPACE_ID"
+  src="https://feedback-in.vercel.app/embed/SPACE_ID"
+  frameborder="0" scrolling="no" width="100%"></iframe>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/4.3.2/iframeResizer.min.js"></script>
+<script>iFrameResize({ log: false, checkOrigin: false }, '#embed-SPACE_ID');</script>
 ```
 
+Display options (set in the dashboard): which feedback to show, background, card and text colours, hide the date, equal card heights, and card shadow.
 
-## 🙌 Contribute to the Project!
+## Tech stack
 
-We welcome contributions of all kinds! Whether you're fixing bugs, or adding new features, every bit of help makes a difference. Here's how you can contribute:
+| Area | Tools |
+|---|---|
+| Framework | Next.js 14 (App Router), React 18, TypeScript |
+| UI | Tailwind CSS, shadcn/ui (Radix UI), Aceternity UI, Framer Motion, Embla Carousel |
+| State and forms | Redux Toolkit with redux-persist, React Hook Form, Zod |
+| Auth | NextAuth (GitHub and Google providers) |
+| Database | MongoDB with Mongoose |
+| Media | Cloudinary |
+| Hosting | Vercel |
 
-1. **Fork the repo** and create a new branch for your feature or bugfix.
-2. **Make your changes**, ensuring the code is clean and well-documented.
-3. **Submit a pull request** explaining your changes and how they enhance the project.
+## Getting started
 
-Your contributions are highly appreciated! 😊
+### Prerequisites
 
----
+- Node.js 18.17 or newer
+- A MongoDB database ([Atlas](https://www.mongodb.com/atlas) free tier works)
+- A [Cloudinary](https://cloudinary.com/) account
+- A GitHub and/or Google OAuth app
 
-### 🐛 Found a Bug?
+### Setup
 
-If you encounter any issues, please report them by:
-- Opening an issue on GitHub, or
-- Sending an email to: [hmadafzal00@gmail.com](mailto:hmadafzal00@gmail.com)
+```bash
+git clone https://github.com/HmadAfzal/feedback.git
+cd feedback
+npm install
+cp .env.example .env.local
+```
 
-Let's work together to improve this project! 🚀
+Fill in `.env.local` (see below), then start the dev server:
+
+```bash
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000).
+
+### Environment variables
+
+| Variable | Description |
+|---|---|
+| `MONGO_URI` | MongoDB connection string |
+| `NEXTAUTH_SECRET` | Random secret for NextAuth. Generate one with `openssl rand -base64 32` |
+| `GITHUB_CLIENT_ID`, `GITHUB_CLIENT_SECRET` | GitHub OAuth app credentials |
+| `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET` | Google OAuth credentials |
+| `NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME` | Cloudinary cloud name |
+| `NEXT_PUBLIC_CLOUDINARY_API_KEY` | Cloudinary API key |
+| `NEXT_PUBLIC_CLOUDINARY_API_SECRET` | Cloudinary API secret |
+
+In production, also set `NEXTAUTH_URL` to your deployed URL.
+
+### OAuth callback URLs
+
+Register these in your OAuth apps for local development:
+
+- GitHub: `http://localhost:3000/api/auth/callback/github`
+- Google: `http://localhost:3000/api/auth/callback/google`
+
+### Cloudinary upload preset
+
+Image uploads use a Cloudinary upload preset. Create one in your Cloudinary dashboard (Settings, Upload, Upload presets), then enter its name in:
+
+- `src/components/SendMessage/Main.tsx`
+- `src/components/dashboardFormPreview.tsx`
+
+## Scripts
+
+| Command | Description |
+|---|---|
+| `npm run dev` | Start the development server |
+| `npm run build` | Create a production build |
+| `npm start` | Run the production build |
+| `npm run lint` | Lint the codebase |
+
+## Project structure
+
+```
+src/
+├── app/
+│   ├── (app)/             Dashboard and space management (signed-in area)
+│   ├── (auth)/            Authentication pages
+│   ├── api/               Route handlers: spaces, messages, likes, image deletion, auth
+│   ├── create-space/      New space flow
+│   ├── embed/[spaceId]/   Carousel rendered inside the embed iframe
+│   └── u/[spacename]/     Public feedback page
+├── components/            UI components
+├── models/                Mongoose models: User, Space, Message
+├── schemas/               Zod validation schemas
+├── redux/                 Store and slices
+├── lib/, utils/           Helpers (DB connection and more)
+└── middleware.ts          Route middleware
+```
+
+## Data model
+
+- **Space**: `name`, `image`, `title`, `description`, `theme` (light or dark), `buttonText`, `thankyouPageTitle`, `thankyouPageText`, `owner`, `messages`
+- **Message**: `name`, `feedback`, `email`, `image`, `isLiked`, `space`
+
+## Deployment
+
+The app deploys to [Vercel](https://vercel.com/) with no extra configuration:
+
+1. Import the repository and add the environment variables above, including `NEXTAUTH_URL`.
+2. Add your production callback URLs to the GitHub and Google OAuth apps.
+3. Deploy.
+
+## Contributing
+
+Contributions are welcome.
+
+1. Fork the repository and create a branch for your change.
+2. Make your changes and run `npm run lint`.
+3. Open a pull request describing what changed and why.
+
+Found a bug? [Open an issue](https://github.com/HmadAfzal/feedback/issues) or email [hmadafzal00@gmail.com](mailto:hmadafzal00@gmail.com).
+
+## License
+
+See [LICENSE](LICENSE).
+
+## Author
+
+Built by [Hammad Afzal](https://github.com/HmadAfzal).
